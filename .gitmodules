@@ -16,3 +16,6 @@
 [submodule "smartCopy"]
 	path = smartCopy
 	url = git@github.com:tgunr/fSmartCopy.git
+[submodule "file"]
+	path = file
+	url = git@github.com:tgunr/fFiles.git
