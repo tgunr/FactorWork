@@ -10,3 +10,6 @@
 [submodule "folders"]
 	path = folders
 	url = git@github.com:tgunr/fFolders.git
+[submodule "shell"]
+	path = shell
+	url = git@github.com:tgunr/fShell.git
