@@ -1,3 +1,6 @@
 [submodule "davec"]
 	path = davec
 	url = git@github.com:tgunr/fDavec.git
+[submodule "factor-explain"]
+	path = factor-explain
+	url = git@github.com:tgunr/factor-explain.git
