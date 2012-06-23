@@ -13,3 +13,6 @@
 [submodule "shell"]
 	path = shell
 	url = git@github.com:tgunr/fShell.git
+[submodule "smartCopy"]
+	path = smartCopy
+	url = git@github.com:tgunr/fSmartCopy.git
