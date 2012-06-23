@@ -1,0 +1,3 @@
+[submodule "davec"]
+	path = davec
+	url = git@github.com:tgunr/fDavec.git
