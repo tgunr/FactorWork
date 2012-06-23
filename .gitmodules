@@ -4,3 +4,6 @@
 [submodule "factor-explain"]
 	path = factor-explain
 	url = git@github.com:tgunr/factor-explain.git
+[submodule "dropbox"]
+	path = dropbox
+	url = git@github.com:tgunr/fDropbox.git
