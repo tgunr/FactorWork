@@ -19,3 +19,6 @@
 [submodule "file"]
 	path = file
 	url = git@github.com:tgunr/fFiles.git
+[submodule "c-types-ext"]
+	path = c-types-ext
+	url = git@github.com:tgunr/fCtypes.git
