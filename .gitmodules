@@ -7,8 +7,8 @@
 [submodule "dropbox"]
 	path = dropbox
 	url = git@github.com:tgunr/fDropbox.git
-[submodule "folders"]
-	path = folders
+[submodule "folder"]
+	path = folder
 	url = git@github.com:tgunr/fFolders.git
 [submodule "shell"]
 	path = shell
