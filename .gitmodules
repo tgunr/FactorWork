@@ -22,3 +22,9 @@
 [submodule "c-types-ext"]
 	path = c-types-ext
 	url = git@github.com:tgunr/fCtypes.git
+[submodule "extensions"]
+	path = extensions
+	url = git@github.com:tgunr/fExtensions.git
+[submodule "mikrotik"]
+	path = mikrotik
+	url = git@github.com:tgunr/fMikrotik.git
