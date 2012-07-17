@@ -24,7 +24,7 @@
 	url = git@github.com:tgunr/fCtypes.git
 [submodule "extensions"]
 	path = extensions
-	url = git@github.com:tgunr/fExtensions.git
+	url = git@bitbucket.org:tgunr/fextensions.git
 [submodule "mikrotik"]
 	path = mikrotik
-	url = git@github.com:tgunr/fMikrotik.git
+	url = git@bitbucket.org:tgunr/fmikrotik.git
