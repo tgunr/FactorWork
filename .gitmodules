@@ -37,3 +37,6 @@
 [submodule "pcap"]
 	path = pcap
 	url = git@github.com:tgunr/fpcap.git
+[submodule "diff"]
+	path = diff
+	url = git@github.com:tgunr/fdiff.git
