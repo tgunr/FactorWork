@@ -40,3 +40,6 @@
 [submodule "diff"]
 	path = diff
 	url = git@github.com:tgunr/fdiff.git
+[submodule "mysql"]
+	path = mysql
+	url = git@github.com:tgunr/fMySQL.git
