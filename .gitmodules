@@ -25,3 +25,12 @@
 [submodule "FactorFinder"]
 	path = FactorFinder
 	url = git@github.com:tgunr/FactorFinder.git
+[submodule "acl"]
+	path = acl
+	url = git@github.com:tgunr/fACL.git
+[submodule "c-types-ext"]
+	path = c-types-ext
+	url = git@github.com:tgunr/fCtypes.git
+[submodule "dropbox"]
+	path = dropbox
+	url = git@github.com:tgunr/fDropbox.git
