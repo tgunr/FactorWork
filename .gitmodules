@@ -4,9 +4,6 @@
 [submodule "factor-explain"]
 	path = factor-explain
 	url = git@github.com:tgunr/factor-explain.git
-[submodule "dropbox"]
-	path = dropbox
-	url = git@github.com:tgunr/fDropbox.git
 [submodule "folder"]
 	path = folder
 	url = git@github.com:tgunr/fFolders.git
@@ -19,12 +16,12 @@
 [submodule "file"]
 	path = file
 	url = git@github.com:tgunr/fFiles.git
-[submodule "c-types-ext"]
-	path = c-types-ext
-	url = git@github.com:tgunr/fCtypes.git
 [submodule "extensions"]
 	path = extensions
 	url = git@bitbucket.org:tgunr/fextensions.git
 [submodule "mikrotik"]
 	path = mikrotik
 	url = git@bitbucket.org:tgunr/fmikrotik.git
+[submodule "FactorFinder"]
+	path = FactorFinder
+	url = git@github.com:tgunr/FactorFinder.git
