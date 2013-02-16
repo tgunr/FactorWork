@@ -43,3 +43,18 @@
 [submodule "mysql"]
 	path = mysql
 	url = git@github.com:tgunr/fMySQL.git
+[submodule "js-factor"]
+	path = js-factor
+	url = git@github.com:tgunr/fjs-script.git
+[submodule "netflow"]
+	path = netflow
+	url = git@github.com:tgunr/f-netflow.git
+[submodule "new-regexp"]
+	path = new-regexp
+	url = git@github.com:tgunr/f-new-regexp.git
+[submodule "sshutil"]
+	path = sshutil
+	url = git@github.com:tgunr/f-sshutil.git
+[submodule "zencart"]
+	path = zencart
+	url = git@github.com:tgunr/f-zencart.git
