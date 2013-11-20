@@ -58,3 +58,12 @@
 [submodule "zencart"]
 	path = zencart
 	url = git@github.com:tgunr/f-zencart.git
+[submodule "unix"]
+	path = unix
+	url = git@bitbucket.org:tgunr/funix.git
+[submodule "keymapper"]
+	path = keymapper
+	url = git@bitbucket.org:tgunr/fkeymapper.git
+[submodule "spotlight"]
+	path = spotlight
+	url = https://github.com/cwalston/spotlight.factor.git
