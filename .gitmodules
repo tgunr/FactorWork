@@ -60,10 +60,16 @@
 	url = git@github.com:tgunr/f-zencart.git
 [submodule "unix"]
 	path = unix
-	url = git@bitbucket.org:tgunr/funix.git
+	url = ./unix
 [submodule "keymapper"]
 	path = keymapper
 	url = git@bitbucket.org:tgunr/fkeymapper.git
 [submodule "spotlight"]
 	path = spotlight
-	url = https://github.com/cwalston/spotlight.factor.git
+	url = ./spotlight
+[submodule "starting-forth"]
+	path = starting-forth
+	url = ./starting-forth/
+[submodule "tools"]
+	path = tools
+	url = ./tools
