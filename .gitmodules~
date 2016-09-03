@@ -12,10 +12,10 @@
 	url = git@bitbucket.org:tgunr/factor-shell.git
 [submodule "smartcp"]
 	path = smartcp
-	url = git@bitbucket.org:tgunr/factor-smartcp.git
+	url = git@github.com:tgunr/fSmartCopy.git
 [submodule "file"]
 	path = file
-	url = git@bitbucket.org:tgunr/factor-files.git
+	url = git@github.com:tgunr/fFiles.git
 [submodule "extensions"]
 	path = extensions
 	url = git@bitbucket.org:tgunr/factor-extensions.git
@@ -24,13 +24,13 @@
 	url = git@bitbucket.org:tgunr/factor-mikrotik.git
 [submodule "FactorFinder"]
 	path = FactorFinder
-	url = git@bitbucket.org:tgunr/factor-factorfinder.git
+	url = git@github.com:tgunr/FactorFinder.git
 [submodule "acl"]
 	path = acl
 	url = git@bitbucket.org:tgunr/factor-acl.git
 [submodule "c-types-ext"]
 	path = c-types-ext
-	url = git@bitbucket.org:tgunr/factor-c-types.git
+	url = git@bitbucket.org:tgunr/factor-ctypes.git
 [submodule "dropbox"]
 	path = dropbox
 	url = git@bitbucket.org:tgunr/factor-dropbox.git
@@ -66,16 +66,13 @@
 	url = git@bitbucket.org:tgunr/factor-keymapper.git
 [submodule "spotlight"]
 	path = spotlight
-	url = https://github.com/cwalston/spotlight.factor.git
+	url = ./spotlight
 [submodule "starting-forth"]
 	path = starting-forth
-	url = git@bitbucket.org:tgunr/factor-starting-forth.git
+	url = ./starting-forth/
 [submodule "tools"]
 	path = tools
 	url = git@bitbucket.org:tgunr/factor-tools.git
 [submodule "pmlog"]
 	path = pmlog
-	url = ./pmlog
-[submodule "ping6"]
-	path = ping6
-	url = git@bitbucket.org:tgunr/factor-ping6.git
+	url = git@bitbucket.org:tgunr/factor-pmlog.git
