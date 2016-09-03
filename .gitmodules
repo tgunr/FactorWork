@@ -43,9 +43,6 @@
 [submodule "mysql"]
 	path = mysql
 	url = git@bitbucket.org:tgunr/factor-mysql.git
-[submodule "js-factor"]
-	path = js-factor
-	url = git@bitbucket.org:tgunr/factor-js-script.git
 [submodule "netflow"]
 	path = netflow
 	url = git@bitbucket.org:tgunr/factor-netflow.git
@@ -77,3 +74,6 @@
 	path = pmlog
 	url = git@bitbucket.org:tgunr/factor-pmlog.git
 
+[submodule "js-script"]
+	path = js-script
+	url = git@bitbucket.org:tgunr/factor-js-script.git
