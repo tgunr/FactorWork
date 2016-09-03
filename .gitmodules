@@ -75,7 +75,5 @@
 	url = git@bitbucket.org:tgunr/factor-tools.git
 [submodule "pmlog"]
 	path = pmlog
-	url = ./pmlog
-[submodule "ping6"]
-	path = ping6
-	url = git@bitbucket.org:tgunr/factor-ping6.git
+	url = git@bitbucket.org:tgunr/factor-pmlog.git
+
