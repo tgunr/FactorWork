@@ -60,7 +60,7 @@
 	url = git@bitbucket.org:tgunr/factor-unix.git
 [submodule "keymapper"]
 	path = keymapper
-	url = git@bitbucket.org:tgunr/factor-keymapper.git
+	url = ssh://git@bitbucket.org/tgunr/fkeymapper.git
 [submodule "spotlight"]
 	path = spotlight
 	url = https://github.com/cwalston/spotlight.factor.git
@@ -80,3 +80,24 @@
 [submodule "itunes"]
 	path = itunes
 	url = ssh://git@bitbucket.org/tgunr/factor-tunes.git
+[submodule "gstreamer"]
+	path = gstreamer
+	url = ssh://git@bitbucket.org/tgunr/factor-gstreamer.git
+[submodule "marten"]
+	path = marten
+	url = git@bitbucket.org:tgunr/fmarten.git
+[submodule "nft"]
+	path = nft
+	url = ssh://git@bitbucket.org/tgunr/fnft.git
+[submodule "options"]
+	path = options
+	url = https://github.com/andreaferretti/factor-options
+[submodule "pg"]
+	path = pg
+	url = git@bitbucket.org:tgunr/fpg.git
+[submodule "playnet"]
+	path = playnet
+	url = git@bitbucket.org:tgunr/fplaynet.get
+[submodule "solar"]
+	path = solar
+	url = git@bitbucket.org:tgunr/fsolar.git
