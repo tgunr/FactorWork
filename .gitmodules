@@ -77,3 +77,6 @@
 [submodule "js-script"]
 	path = js-script
 	url = git@bitbucket.org:tgunr/factor-js-script.git
+[submodule "itunes"]
+	path = itunes
+	url = ssh://git@bitbucket.org/tgunr/factor-tunes.git
