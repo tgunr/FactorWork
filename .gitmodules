@@ -1,33 +1,33 @@
 [submodule "davec"]
 	path = davec
-	url = git@github.com:tgunr/fDavec.git
+url=git@bitbucket.org:tgunr/factor-davec.git
 [submodule "factor-explain"]
 	path = factor-explain
-	url = git@github.com:tgunr/factor-explain.git
+url=git@bitbucket.org:tgunr/factor-explain.git
 [submodule "dropbox"]
 	path = dropbox
-	url = git@github.com:tgunr/fDropbox.git
+url=git@bitbucket.org:tgunr/factor-dropbox.git
 [submodule "folder"]
 	path = folder
-	url = git@github.com:tgunr/fFolders.git
+url=git@bitbucket.org:tgunr/factor-folders.git
 [submodule "shell"]
 	path = shell
-	url = git@github.com:tgunr/fShell.git
+url=git@bitbucket.org:tgunr/factor-shell.git
 [submodule "smartcp"]
 	path = smartcp
-	url = git@github.com:tgunr/fSmartCopy.git
+url=git@bitbucket.org:tgunr/factor-smartcp.git
 [submodule "file"]
 	path = file
-	url = git@github.com:tgunr/fFiles.git
+url=git@bitbucket.org:tgunr/factor-files.git
 [submodule "c-types-ext"]
 	path = c-types-ext
-	url = git@github.com:tgunr/fCtypes.git
+url=ssh://git@bitbucket.org/tgunr/factor-c-types.git
 [submodule "extensions"]
 	path = extensions
-	url = git@bitbucket.org:tgunr/fextensions.git
+url=git@bitbucket.org:tgunr/factor-extensions.git
 [submodule "mikrotik"]
 	path = mikrotik
-	url = git@bitbucket.org:tgunr/fmikrotik.git
+url=git@bitbucket.org:tgunr/factor-mikrotik.git
 [submodule "acl"]
 	path = acl
 url=ssh://git@bitbucket.org/tgunr/factor-acl.git
