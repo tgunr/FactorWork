@@ -101,3 +101,6 @@
 [submodule "solar"]
 	path = solar
 	url = git@bitbucket.org:tgunr/fsolar.git
+[submodule "pickadisk"]
+	path = pickadisk
+	url = ssh://git@bitbucket.org/tgunr/fpickadik.git
