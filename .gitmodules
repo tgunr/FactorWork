@@ -1,63 +1,63 @@
 [submodule "davec"]
 	path = davec
-	url = git@bitbucket.org:tgunr/factor-davec.git
+	url = git@bitbucket.org:tgunr/fdavec.git
 [submodule "explain"]
 	path = explain
-	url = git@bitbucket.org:tgunr/factor-explain.git
+	url = git@bitbucket.org:tgunr/fexplain.git
 [submodule "folder"]
 	path = folder
-	url = git@bitbucket.org:tgunr/factor-folders.git
+	url = git@bitbucket.org:tgunr/ffolders.git
 [submodule "shell"]
 	path = shell
-	url = git@bitbucket.org:tgunr/factor-shell.git
+	url = git@bitbucket.org:tgunr/fshell.git
 [submodule "smartcp"]
 	path = smartcp
-	url = git@bitbucket.org:tgunr/factor-smartcp.git
+	url = git@bitbucket.org:tgunr/fsmartcp.git
 [submodule "file"]
 	path = file
-	url = git@bitbucket.org:tgunr/factor-files.git
+	url = git@bitbucket.org:tgunr/ffiles.git
 [submodule "extensions"]
 	path = extensions
-	url = git@bitbucket.org:tgunr/factor-extensions.git
+	url = git@bitbucket.org:tgunr/fextensions.git
 [submodule "mikrotik"]
 	path = mikrotik
-	url = git@bitbucket.org:tgunr/factor-mikrotik.git
+	url = git@bitbucket.org:tgunr/fmikrotik.git
 [submodule "FactorFinder"]
 	path = FactorFinder
-	url = git@bitbucket.org:tgunr/factor-factorfinder.git
+	url = git@bitbucket.org:tgunr/ffactorfinder.git
 [submodule "acl"]
 	path = acl
-	url = git@bitbucket.org:tgunr/factor-acl.git
+	url = git@bitbucket.org:tgunr/facl.git
 [submodule "c-types-ext"]
 	path = c-types-ext
-	url = git@bitbucket.org:tgunr/factor-c-types.git
+	url = git@bitbucket.org:tgunr/fc-types.git
 [submodule "dropbox"]
 	path = dropbox
-	url = git@bitbucket.org:tgunr/factor-dropbox.git
+	url = git@bitbucket.org:tgunr/fdropbox.git
 [submodule "pcap"]
 	path = pcap
-	url = git@bitbucket.org:tgunr/factor-pcap.git
+	url = git@bitbucket.org:tgunr/fpcap.git
 [submodule "diff"]
 	path = diff
-	url = git@bitbucket.org:tgunr/factor-diff.git
+	url = git@bitbucket.org:tgunr/fdiff.git
 [submodule "mysql"]
 	path = mysql
-	url = git@bitbucket.org:tgunr/factor-mysql.git
+	url = git@bitbucket.org:tgunr/fmysql.git
 [submodule "netflow"]
 	path = netflow
-	url = git@bitbucket.org:tgunr/factor-netflow.git
+	url = git@bitbucket.org:tgunr/fnetflow.git
 [submodule "new-regexp"]
 	path = new-regexp
-	url = git@bitbucket.org:tgunr/factor-new-regexp.git
+	url = git@bitbucket.org:tgunr/fnew-regexp.git
 [submodule "sshutil"]
 	path = sshutil
-	url = git@bitbucket.org:tgunr/factor-sshutil.git
+	url = git@bitbucket.org:tgunr/fsshutil.git
 [submodule "zencart"]
 	path = zencart
-	url = git@bitbucket.org:tgunr/factor-zencart.git
+	url = git@bitbucket.org:tgunr/fzencart.git
 [submodule "unix"]
 	path = unix
-	url = git@bitbucket.org:tgunr/factor-unix.git
+	url = git@bitbucket.org:tgunr/funix.git
 [submodule "keymapper"]
 	path = keymapper
 	url = ssh://git@bitbucket.org/tgunr/fkeymapper.git
@@ -66,23 +66,23 @@
 	url = https://github.com/cwalston/spotlight.factor.git
 [submodule "starting-forth"]
 	path = starting-forth
-	url = git@bitbucket.org:tgunr/factor-starting-forth.git
+	url = git@bitbucket.org:tgunr/fstarting-forth.git
 [submodule "tools"]
 	path = tools
-	url = git@bitbucket.org:tgunr/factor-tools.git
+	url = git@bitbucket.org:tgunr/ftools.git
 [submodule "pmlog"]
 	path = pmlog
-	url = git@bitbucket.org:tgunr/factor-pmlog.git
+	url = git@bitbucket.org:tgunr/fpmlog.git
 
 [submodule "js-script"]
 	path = js-script
-	url = git@bitbucket.org:tgunr/factor-js-script.git
+	url = git@bitbucket.org:tgunr/fjs-script.git
 [submodule "itunes"]
 	path = itunes
-	url = ssh://git@bitbucket.org/tgunr/factor-tunes.git
+	url = ssh://git@bitbucket.org/tgunr/ftunes.git
 [submodule "gstreamer"]
 	path = gstreamer
-	url = ssh://git@bitbucket.org/tgunr/factor-gstreamer.git
+	url = ssh://git@bitbucket.org/tgunr/fgstreamer.git
 [submodule "marten"]
 	path = marten
 	url = git@bitbucket.org:tgunr/fmarten.git
