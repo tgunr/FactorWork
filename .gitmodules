@@ -52,9 +52,6 @@
 [submodule "sshutil"]
 	path = sshutil
 	url = git@bitbucket.org:tgunr/fsshutil.git
-[submodule "zencart"]
-	path = zencart
-	url = git@bitbucket.org:tgunr/fzencart.git
 [submodule "unix"]
 	path = unix
 	url = git@bitbucket.org:tgunr/funix.git
@@ -88,18 +85,9 @@
 [submodule "nft"]
 	path = nft
 	url = ssh://git@bitbucket.org/tgunr/fnft.git
-[submodule "options"]
-	path = options
-	url = https://github.com/andreaferretti/factor-options
 [submodule "pg"]
 	path = pg
 	url = git@bitbucket.org:tgunr/fpg.git
-[submodule "playnet"]
-	path = playnet
-	url = git@bitbucket.org:tgunr/fplaynet.get
 [submodule "solar"]
 	path = solar
 	url = git@bitbucket.org:tgunr/fsolar.git
-[submodule "pickadisk"]
-	path = pickadisk
-	url = ssh://git@bitbucket.org/tgunr/fpickadik.git
