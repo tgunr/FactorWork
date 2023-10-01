@@ -94,3 +94,13 @@
 [submodule "options"]
     path = options
     url = git@github.com:andreaferretti/factor-options.git
+[submodule "pickadisk"]
+    path = pickadisk
+    url = git@bitbucket.org:tgunr/fpickadisk.git
+[submodule "playnet"]
+    path = playnet
+    url = git@bitbucket.org:tgunr/fplaynet.git
+[submodule "zencart"]
+    path = zencart
+    url = git@bitbucket.org:tgunr/fzencart.git
+    
