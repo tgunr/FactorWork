@@ -91,3 +91,6 @@
 [submodule "solar"]
 	path = solar
 	url = git@bitbucket.org:tgunr/fsolar.git
+[submodule "options"]
+    path = options
+    url = git@github.com:andreaferretti/factor-options.git
