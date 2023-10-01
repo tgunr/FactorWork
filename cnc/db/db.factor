@@ -4,7 +4,7 @@
 ! Description: CNC database
 ! Copyright (C) 2023 Dave Carlton.
 ! See https://factorcode.org/license.txt for BSD license.
-USING: cnc db kernel namespaces sequences ;
+USING: accessors cnc db db.sqlite kernel namespaces sequences ;
 
 IN: cnc.db
 
