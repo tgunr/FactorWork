@@ -1,7 +1,7 @@
 ! Copyright (C) 2023 Dave Carlton.
 ! See https://factorcode.org/license.txt for BSD license.
 USING: accessors db.tuples db.types kernel math.parser sequences
-splitting strings syntax.terse
+splitting sequences.strings syntax.terse
 cnc
 cnc.db
 cnc.bit ;
@@ -19,7 +19,7 @@ bit-geometry "bit_geometry" {
     { "id" "id" TEXT +user-assigned-id+ +not-null+ }
 } define-persistent
 
-FROM: strings => trim-whitespace ; 
+FROM: help.syntax.private => trim-whitespace ; 
 : convert-bit-geometry ( bit -- bit )
     [ name>> ] retain  " " split  unclip  dup unclip
     CHAR: # =

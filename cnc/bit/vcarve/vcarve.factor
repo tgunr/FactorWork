@@ -1,6 +1,6 @@
 ! Copyright (C) 2023 Dave Carlton.
 ! See https://factorcode.org/license.txt for BSD license.
-USING: accessors ascii classes classes.tuple cnc cnc.bit
+USING: accessors ascii classes classes.tuple cnc cnc.db cnc.bit
  cnc.bit.cutting-data cnc.bit.entity cnc.bit.geometry cnc.machine cnc.material combinators.smart
  db db.queries db.tuples db.types kernel math
  namespaces sequences slots.syntax splitting  ;

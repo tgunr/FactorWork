@@ -3,7 +3,7 @@
 ! Description: CNC Machine
 ! Copyright (C) 2022 Dave Carlton.
 ! See http://factorcode.org/license.txt for BSD license.
-USING: accessors alien.enums alien.syntax cnc cnc.jobs db.tuples
+USING: accessors alien.enums alien.syntax cnc cnc.db cnc.jobs db.tuples
 db.types kernel math uuid  ;
 
 IN: cnc.machine

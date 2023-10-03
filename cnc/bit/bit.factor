@@ -4,18 +4,14 @@
 ! Description: CNC bit data
 ! Copyright (C) 2022 Dave Carlton.
 ! See http://factorcode.org/license.txt for BSD license.
-USING: accessors alien.enums alien.syntax assocs classes.tuple combinators combinators.smart db
-db.sqlite db.tuples db.types hashtables kernel math math.parser models
-namespaces  sequences splitting strings syntax.terse ui
-ui.commands ui.gadgets ui.gadgets.borders ui.gadgets.editors
-ui.gadgets.labels ui.gadgets.packs ui.gadgets.toolbar
-ui.gadgets.worlds ui.gestures ui.tools.browser ui.tools.common
-ui.tools.deploy uuid uuid.private
-cnc
-cnc.db
-cnc.bit.cutting-data
-cnc.bit.geometry
-cnc.bit.entity
+USING: accessors alien.enums alien.syntax assocs classes.tuple combinators
+combinators.smart db db.sqlite db.tuples db.types hashtables kernel
+math math.parser models namespaces sequences splitting strings
+syntax.terse ui ui.commands ui.gadgets ui.gadgets.borders
+ui.gadgets.editors ui.gadgets.labels ui.gadgets.packs
+ui.gadgets.toolbar ui.gadgets.worlds ui.gestures ui.tools.browser
+ui.tools.common ui.tools.deploy uuid uuid.private help.syntax.private
+cnc cnc.db cnc.bit.cutting-data cnc.bit.geometry cnc.bit.entity sequences.strings
 multiline ;
 IN: cnc.bit
 
