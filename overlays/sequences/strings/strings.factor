@@ -5,7 +5,7 @@
 ! Copyright (C) 2014 Dave Carlton.
 ! See http://factorcode.org/license.txt for BSD license.
 
-USING: ascii kernel regexp sequences splitting strings
+USING: ascii assocs make kernel regexp sequences splitting strings
 tools.continuations ;
 
 IN: sequences.strings
@@ -38,3 +38,10 @@ IN: sequences.strings
 : trim-leading ( seq -- seq )   [ [ blank? ] trim-head ] map ;
 : trim-trailing ( seq -- seq )   [ [ blank? ] trim-tail ] map ;
 : trim-ends ( seq -- seq )   [ [ blank? ] trim ] map ;
+
+: soft-quote ( string -- string' )
+    "\"" dup surround ;
+: hard-quote ( string -- string' )
+    "'" dup surround ;
+
+
