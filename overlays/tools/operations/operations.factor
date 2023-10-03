@@ -127,11 +127,11 @@ IN: ui.tools.operations
 
 [ word? ] \ breakpoint H{ } define-operation
 
-USE: overlays.tools.walker
-FROM: tools.walker => show-callstack show-datastack ;
-[ word? ] \ show-callstack H{ } define-operation
+! USE: overlays.tools.walker
+! FROM: tools.walker => show-callstack show-datastack ;
+! [ word? ] \ show-callstack H{ } define-operation
 
-[ word? ] \ show-datastack H{ } define-operation
+! [ word? ] \ show-datastack H{ } define-operation
 
 [ word? ] \ see H{
     { +listener+ t }

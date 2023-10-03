@@ -180,12 +180,12 @@ SYMBOL: +stopped+
     ] annotate ;
 
 USE: overlays.tools.continuations
-FROM: tools.continuations => add-callstack add-datastack ;
-: show-callstack ( word -- )
-    [ add-callstack ] annotate ;
+! FROM: tools.continuations => add-callstack add-datastack ;
+! : show-callstack ( word -- )
+!     [ add-callstack ] annotate ;
 
-: show-datastack ( word -- )
-    [ add-datastack ] annotate ;
+! : show-datastack ( word -- )
+!     [ add-datastack ] annotate ;
 
 ! For convenience
 IN: syntax
