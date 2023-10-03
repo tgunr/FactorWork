@@ -164,3 +164,7 @@ ERROR: no-defined-persistent object ;
 
 : reject-tuples ( query/tuple quot: ( tuple -- ? ) -- )
     '[ dup @ [ delete-tuples ] [ drop ] if ] each-tuple ; inline
+
+: replace-tuple ( tuple -- )
+    dup id>> over class-of new [ id<< ] keep select-tuple
+    [ update-tuple ] [ insert-tuple ] if ;
