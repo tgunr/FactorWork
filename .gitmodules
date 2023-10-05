@@ -46,9 +46,6 @@
 [submodule "itunes"]
 	path = itunes
 	url = ssh://git@bitbucket.org/tgunr/ftunes.git
-[submodule "gstreamer"]
-	path = gstreamer
-	url = ssh://git@bitbucket.org/tgunr/fgstreamer.git
 [submodule "marten"]
 	path = marten
 	url = git@bitbucket.org:tgunr/fmarten.git
