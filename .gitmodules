@@ -25,9 +25,6 @@
 [submodule "unix"]
 	path = unix
 	url = git@bitbucket.org:tgunr/funix.git
-[submodule "keymapper"]
-	path = keymapper
-	url = ssh://git@bitbucket.org/tgunr/fkeymapper.git
 [submodule "spotlight"]
 	path = spotlight
 	url = https://github.com/cwalston/spotlight.factor.git
