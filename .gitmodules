@@ -10,9 +10,6 @@
 [submodule "file"]
 	path = file
 	url = git@bitbucket.org:tgunr/ffiles.git
-[submodule "extensions"]
-	path = extensions
-	url = git@bitbucket.org:tgunr/fextensions.git
 [submodule "mikrotik"]
 	path = mikrotik
 	url = git@bitbucket.org:tgunr/fmikrotik.git
