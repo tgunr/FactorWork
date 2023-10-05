@@ -6,7 +6,7 @@ USING: accessors ascii classes classes.tuple cnc cnc.db cnc.bit
  namespaces sequences slots.syntax splitting  ;
 IN: cnc.bit.vcarve
 
-SYMBOL: vcarve-db-path vcarve-db-path [ "/Users/davec/Dropbox/3CL/Data/tools.vtdb" ]  initialize
+SYMBOL: vcarve-db-path vcarve-db-path [ "/Users/davec/icloud/3CL/Data/tools.vtdb" ]  initialize
 
 CONSTANT: toolgeometry "tool_geometry."
 : geometry-clause  ( string -- clause )
