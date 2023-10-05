@@ -40,9 +40,6 @@
 [submodule "pmlog"]
 	path = pmlog
 	url = git@bitbucket.org:tgunr/fpmlog.git
-[submodule "js-script"]
-	path = js-script
-	url = git@bitbucket.org:tgunr/fjs-script.git
 [submodule "marten"]
 	path = marten
 	url = git@bitbucket.org:tgunr/fmarten.git
