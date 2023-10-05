@@ -1,6 +1,3 @@
-[submodule "folder"]
-	path = folder
-	url = git@bitbucket.org:tgunr/ffolders.git
 [submodule "shell"]
 	path = shell
 	url = git@bitbucket.org:tgunr/fshell.git
