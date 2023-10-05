@@ -1,21 +1,12 @@
-[submodule "shell"]
-	path = shell
-	url = git@bitbucket.org:tgunr/fshell.git
 [submodule "smartcp"]
 	path = smartcp
 	url = git@bitbucket.org:tgunr/fsmartcp.git
-[submodule "mikrotik"]
-	path = mikrotik
-	url = git@bitbucket.org:tgunr/fmikrotik.git
 [submodule "pcap"]
 	path = pcap
 	url = git@bitbucket.org:tgunr/fpcap.git
 [submodule "mysql"]
 	path = mysql
 	url = git@bitbucket.org:tgunr/fmysql.git
-[submodule "netflow"]
-	path = netflow
-	url = git@bitbucket.org:tgunr/fnetflow.git
 [submodule "new-regexp"]
 	path = new-regexp
 	url = git@bitbucket.org:tgunr/fnew-regexp.git
@@ -28,18 +19,12 @@
 [submodule "spotlight"]
 	path = spotlight
 	url = https://github.com/cwalston/spotlight.factor.git
-[submodule "starting-forth"]
-	path = starting-forth
-	url = git@bitbucket.org:tgunr/fstarting-forth.git
 [submodule "tools"]
 	path = tools
 	url = git@bitbucket.org:tgunr/ftools.git
 [submodule "pmlog"]
 	path = pmlog
 	url = git@bitbucket.org:tgunr/fpmlog.git
-[submodule "marten"]
-	path = marten
-	url = git@bitbucket.org:tgunr/fmarten.git
 [submodule "nft"]
 	path = nft
 	url = ssh://git@bitbucket.org/tgunr/fnft.git
@@ -52,13 +37,3 @@
 [submodule "options"]
     path = options
     url = git@github.com:andreaferretti/factor-options.git
-[submodule "pickadisk"]
-    path = pickadisk
-    url = git@bitbucket.org:tgunr/fpickadisk.git
-[submodule "playnet"]
-    path = playnet
-    url = git@bitbucket.org:tgunr/fplaynet.git
-[submodule "zencart"]
-    path = zencart
-    url = git@bitbucket.org:tgunr/fzencart.git
-    
