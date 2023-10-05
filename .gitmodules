@@ -1,6 +1,3 @@
-[submodule "davec"]
-	path = davec
-	url = git@bitbucket.org:tgunr/fdavec.git
 [submodule "explain"]
 	path = explain
 	url = git@bitbucket.org:tgunr/fexplain.git
