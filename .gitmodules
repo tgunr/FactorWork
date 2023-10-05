@@ -28,9 +28,6 @@
 [submodule "pcap"]
 	path = pcap
 	url = git@bitbucket.org:tgunr/fpcap.git
-[submodule "diff"]
-	path = diff
-	url = git@bitbucket.org:tgunr/fdiff.git
 [submodule "mysql"]
 	path = mysql
 	url = git@bitbucket.org:tgunr/fmysql.git
