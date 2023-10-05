@@ -7,9 +7,6 @@
 [submodule "smartcp"]
 	path = smartcp
 	url = git@bitbucket.org:tgunr/fsmartcp.git
-[submodule "file"]
-	path = file
-	url = git@bitbucket.org:tgunr/ffiles.git
 [submodule "mikrotik"]
 	path = mikrotik
 	url = git@bitbucket.org:tgunr/fmikrotik.git
