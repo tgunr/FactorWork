@@ -43,9 +43,6 @@
 [submodule "js-script"]
 	path = js-script
 	url = git@bitbucket.org:tgunr/fjs-script.git
-[submodule "itunes"]
-	path = itunes
-	url = ssh://git@bitbucket.org/tgunr/ftunes.git
 [submodule "marten"]
 	path = marten
 	url = git@bitbucket.org:tgunr/fmarten.git
