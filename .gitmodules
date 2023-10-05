@@ -25,9 +25,6 @@
 [submodule "FactorFinder"]
 	path = FactorFinder
 	url = git@bitbucket.org:tgunr/ffactorfinder.git
-[submodule "acl"]
-	path = acl
-	url = git@bitbucket.org:tgunr/facl.git
 [submodule "c-types-ext"]
 	path = c-types-ext
 	url = git@bitbucket.org:tgunr/fc-types.git
