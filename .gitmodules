@@ -22,9 +22,6 @@
 [submodule "FactorFinder"]
 	path = FactorFinder
 	url = git@bitbucket.org:tgunr/ffactorfinder.git
-[submodule "dropbox"]
-	path = dropbox
-	url = git@bitbucket.org:tgunr/fdropboxLinker.git
 [submodule "pcap"]
 	path = pcap
 	url = git@bitbucket.org:tgunr/fpcap.git
