@@ -4,24 +4,31 @@
 ! Description: CNC bit data
 ! Copyright (C) 2022 Dave Carlton.
 ! See http://factorcode.org/license.txt for BSD license.
-USING: accessors alien.enums alien.syntax assocs classes.tuple combinators
-combinators.smart db db.sqlite db.tuples db.types hashtables kernel
-math math.parser models namespaces sequences splitting strings
-syntax.terse ui ui.commands ui.gadgets ui.gadgets.borders
-ui.gadgets.editors ui.gadgets.labels ui.gadgets.packs
-ui.gadgets.toolbar ui.gadgets.worlds ui.gestures ui.tools.browser
-ui.tools.common ui.tools.deploy uuid uuid.private help.syntax.private
-cnc cnc.db cnc.bit.cutting-data cnc.bit.geometry cnc.bit.entity sequences.strings
-multiline ;
+USING: accessors alien.enums assocs classes.tuple cnc cnc.db
+combinators db db.tuples db.types io kernel math math.parser
+namespaces prettyprint sequences splitting strings syntax.terse ;
 IN: cnc.bit
 
 SYMBOL: amanavt-db-path amanavt-db-path [ "/Users/davec/Dropbox/3CL/Data/amanavt.db" ] initialize
 SYMBOL: imperial-db-path imperial-db-path [ "/Users/davec/Desktop/Imperial.db" ]  initialize
 
-ENUM: BitType straight upcut downcut compression ;
-ENUM: ToolType { ballnose 0 } { endmill 1 } { radius-endmill 2 } { v-bit 3 } { engraving 4 } { taper-ballmill 5 }
-    { drill 6 } { diamond 7 } { groove 8 } { threadmill 14 } { multit-thread 15 } { laser 12 } ;
-ENUM: RateUnits { mm/sec 0 } { mm/min 1 } { m/min 2 } { in/sec 3 } { in/min 4 } { ft/min 5 } ;
+SYMBOL: BitType 
+BitType [ { "straight" "upcut" "downcut" "compression" } ] initialize
+
+SYMBOL: ToolType 
+ToolType [ { "ballnose" "endmill" "radius-endmill" "v-bit" "engraving" "taper-ballmill"
+    "drill" "diamond" "groove" "threadmill"  "multit-thread"  "laser" } <enumerated> ] initialize
+
+SYMBOL: RateUnits 
+RateUnits [ { "mm/sec" "mm/min" "m/min" "in/sec" "in/min" "ft/min" } <enumerated> ] initialize
+
+SYMBOL: DimUnits 
+DimUnits [ { "mm" "in" } <enumerated> ] initialize
+
+: enum@ ( key symbol -- value )
+    get  value-at ; 
+: @enum ( value symbol -- key )
+    get  at ; 
 
 ! TUPLES
 TUPLE: bit name units tool_type bit_type diameter stepdown stepover spindle_speed spindle_dir
@@ -57,9 +64,15 @@ bit "bits" {
 
     
 : <bit> ( -- <bit> )
-    bit new  1 >>units  endmill >>tool_type  upcut >>bit_type
-    18000 >>spindle_speed  0 >>spindle_dir 
-    2 >>flutes  mm/min >>rate_units  quintid >>id  ;
+    bit new  
+    "mm" DimUnits enum@ >>units  
+    "endmill" ToolType enum@ >>tool_type  
+    "upcut" BitType enum@ >>bit_type
+    18000 >>spindle_speed  
+    0 >>spindle_dir 
+    2 >>flutes  
+    "mm/min" RateUnits enum@ >>rate_units  
+    quintid >>id  ;
 
 : sql>bit ( bit -- bit )
     [ name>> ] retain  " " split  unclip  dup unclip
@@ -105,13 +118,14 @@ bit "bits" {
     ;
 
 : (>mm/min) ( bit value -- mm-value bit )
-    >number  over rate_units>> >number  <RateUnits> {
-        { mm/sec [ 60 * ] }
-        { mm/min [ ] }
-        { m/min [ 1000 * ] }
-        { in/sec [ 25.4 * 60 * ] }
-        { in/min [ 25.4 * ] }
-        { ft/min [ 304.8 * ] }
+    >number  over rate_units>> >number  RateUnits @enum 
+    { 
+        { "mm/sec" [ 60 * ] }
+        { "mm/min" [ ] }
+        { "m/min" [ 1000 * ] }
+        { "in/sec" [ 25.4 * 60 * ] }
+        { "in/min" [ 25.4 * ] }
+        { "ft/min" [ 304.8 * ] }
     } case  swap ;
     
 : >mm ( bit -- bit )
@@ -120,9 +134,38 @@ bit "bits" {
     [ dup plunge_rate>> (>mm/min) plunge_rate<< ] keep
     [ dup stepdown>> (>mm) stepdown<< ] keep
     [ dup stepover>> (>mm) stepover<< ] keep
-    mm/min enum>number >>rate_units
-    0 >>units 
+    "mm/min" RateUnits enum@ >>rate_units
+    "mm" DimUnits enum@ >>units 
     ;
+
+: .bit ( bit -- )
+    bit new
+    over name>> >>name 
+    over units>> DimUnits @enum  >>units 
+    over tool_type>> ToolType @enum >>tool_type
+    over bit_type>> BitType @enum >>bit_type
+    over diameter>>  >>diameter 
+    over stepdown>>  >>stepdown 
+    over stepover>>  >>stepover
+    over spindle_speed>> >>spindle_speed 
+    over spindle_dir>> >>spindle_dir 
+    over flutes>> >>flutes
+    over shank>> >>shank
+    over shank>> >>shank
+    over flute_length>> >>flute_length
+    over shank_length>> >>shank_length
+    over rate_units>> RateUnits @enum >>rate_units 
+    over feed_rate>> >>feed_rate 
+    over plunge_rate>> >>plunge_rate 
+    over cost>> >>cost 
+    over make>> >>make
+    over model>> >>model
+    over source>> >>source
+    over id>> >>id
+    over amana_id>> >>amana_id
+    over entity_id>> >>entity_id
+    nip pprint nl
+;
 
 : cnc-db>bit ( cnc-dbvt -- bit )
     bit slots>tuple sql>bit ;
@@ -185,7 +228,7 @@ bit "bits" {
     2drop ;
                                 
 : bit-where ( clauses -- seq )
-    bit-where-clause do-cncdb drop ;
+    bit-where-clause do-bitdb drop ;
 
 : bit-name-like ( named --  bit )
     hard-quote
@@ -193,7 +236,7 @@ bit "bits" {
 
 : bit-id= ( string -- bit )
     hard-quote  "id = "  prepend
-    cncdb-where prepend  do-cncdb
+    cncdb-where prepend  do-bitdb
     [ first ] [ drop f ] if ; 
 
 : 1/4-bits ( -- bits )
