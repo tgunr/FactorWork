@@ -6,7 +6,7 @@
 ! See http://factorcode.org/license.txt for BSD license.
 USING: cnc cnc.SM2 cnc.bit cnc.machine cnc.tools io io.launcher
  io.encodings.utf8 io.files kernel math.parser multiline sequences
-syntax.terse ;
+libc syntax.terse ;
 FROM: cnc.machine => machine ;
 IN: cnc.machine.1F
 
@@ -20,15 +20,10 @@ TUPLE: 1F < machine ;
 
 
 : >onefinity ( -- )
-    "/usr/bin/scp /Users/davec/Desktop/Resurface* root@onefinity.local:upload/"
-    run-process wait-for-process 0=
-    [ "ok" ] [ "fail" ] if print 
-    "rsync -auv /Users/davec/Desktop/Resurface* root@onefinity.local:upload/"
-    run-process wait-for-process 0=
+    "/usr/bin/scp ~/Desktop/Resurface* bbmc@onefinity.local:upload/" system 0=
     [ "ok" ] [ "fail" ] if print ;
 
 : onefinity-clear ( -- ) 
-    "ssh root@onefinity.local rm -r upload/*"
-    run-process wait-for-process 0=
+    "ssh root@onefinity.local rm upload/*" system 0=
     [ "ok" ] [ "fail" ] if print ;
 
