@@ -13,7 +13,7 @@ SYMBOL: amanavt-db-path amanavt-db-path [ "/Users/davec/Dropbox/3CL/Data/amanavt
 SYMBOL: imperial-db-path imperial-db-path [ "/Users/davec/Desktop/Imperial.db" ]  initialize
 
 SYMBOL: BitType 
-BitType [ { "straight" "upcut" "downcut" "compression" } ] initialize
+BitType [ { "straight" "upcut" "downcut" "compression" } <enumered> ] initialize
 
 SYMBOL: ToolType 
 ToolType [ { "ballnose" "endmill" "radius-endmill" "v-bit" "engraving" "taper-ballmill"
