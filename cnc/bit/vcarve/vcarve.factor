@@ -3,7 +3,7 @@
 USING: accessors ascii classes classes.tuple cnc cnc.db cnc.bit
  cnc.bit.cutting-data cnc.bit.entity cnc.bit.geometry cnc.machine cnc.material combinators.smart
  db db.queries db.tuples db.types kernel math
- namespaces sequences slots.syntax splitting  ;
+ math.parser namespaces sequences slots.syntax splitting  prettyprint io ;
 IN: cnc.bit.vcarve
 
 SYMBOL: vcarve-db-path vcarve-db-path [ "/Users/davec/icloud/3CL/Data/tools.vtdb" ]  initialize
@@ -24,6 +24,35 @@ TUPLE: vcarve-db < cnc-db ;
 : with-vcarvedb ( quot -- )
     '[  <vcarve> _  with-db ] call ; inline 
 
+TUPLE: vcarve-bit 
+     name
+     tool_type
+     units
+     diameter
+     stepdown
+     stepover
+     spindle_speed
+     spindle_dir
+     rate_units
+     feed_rate
+     plunge_rate
+     id
+    ;
+
+vcarve-bit "vcarve-bits" {
+    { "name" "name_format" }
+    { "tool_type" "tool_type" }
+    { "units" "units" }
+    { "diameter" "diameter" }
+    { "stepdown" "stepdown" }
+    { "stepover" "stepover" }
+    { "spindle_speed" "spindle_speed" }
+    { "spindle_dir" "spindle_dir" }
+    { "rate_units" "rate_units" }
+    { "feed_rate" "feed_rate" }
+    { "plunge_rate" "plunge_rate" }
+    { "id" "id" }
+} define-persistent
 
 : vcarve-preamble ( -- sql )
     "SELECT 
@@ -44,9 +73,27 @@ TUPLE: vcarve-db < cnc-db ;
 	 INNER JOIN tool_cutting_data tcd ON ( tcd.id = te.tool_cutting_data_id  ) "
     clean-whitespace ;
 
-: vcarve-bits ( -- results )
+: .vcarve-bit ( vcarve-bit -- )
+    vcarve-bit new
+    over name>> >>name
+    over tool_type>> >number ToolType @enum >>tool_type
+    over units>> >number DimUnits @enum  >>units 
+    over diameter>> >number >>diameter
+    over stepdown>> >number >>stepdown
+    over stepover>> >number >>stepover
+    over spindle_speed>> >number >>spindle_speed
+    over spindle_dir>> >number >>spindle_dir
+    over rate_units>> >number RateUnits @enum >>rate_units 
+    over feed_rate>> >number >>feed_rate
+    over plunge_rate>> >number >>plunge_rate
+    over id>> >>id
+    nip pprint nl
+;
+
+: vcarve-bits ( -- vcarve-bits )
     vcarve-preamble sql-statement set
-    [ sql-statement get sql-query ] with-vcarvedb ;
+    [ sql-statement get sql-query ] with-vcarvedb
+    [ \ vcarve-bit prefix >tuple ] map ;
 
 : do-vcarvedb ( statement -- result ? )
     sql-statement set
@@ -241,3 +288,10 @@ vcarve-machine "machine" {
     update-cnc-material
     update-cnc-machine
     ;
+
+TUPLE: toolsdb < vcarve-db ;
+: <tools> ( -- <tools> )
+    toolsdb new  cnc-db-path >>path ;
+
+: with-toolsdb ( quot -- )
+    '[  <tools> _  with-db ] call ; inline 
