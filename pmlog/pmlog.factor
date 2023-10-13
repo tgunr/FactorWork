@@ -1,7 +1,7 @@
 ! Copyright (C) 2012 PolyMicro Systems.
 ! See http://factorcode.org/license.txt for BSD license.
 USING: alien.syntax alien.c-types accessors arrays assocs kernel libc locals math math.parser namespaces
-formatting sequences words combinators ;
+strings formatting sequences words combinators ;
 
 IN: libc
 LIBRARY: libc
@@ -108,11 +108,11 @@ pmLogStack [ 256 0 <array> ] initialize
     "NOTE: " prepend
     PMLogLevelTest PMLOGWITHLEVEL ;
 
-: PMLOG_HERE ( -- )
-    "" PMLogLevelTest PMLOGWITHLEVEL ;
-
 : PMLOG_TEST ( msg -- )
     PMLogLevelTest PMLOGWITHLEVEL ;
+
+: (loghere) ( name -- )  +colon-space PMLOG_TEST ;
+SYNTAX: PMLOG_HERE  last-word name>> suffix!  \ (loghere) suffix! ;
 
 : PMLOG_EMERG ( msg -- )
     PMLogLevelEmerg PMLOGWITHLEVEL ;
@@ -150,7 +150,6 @@ pmLogStack [ 256 0 <array> ] initialize
 ;
 
 : PMTEST ( -- )
-    PMLOG_HERE
     "Testing 1 2 3" PMLOG_TEST
     10 <iota> 
     [ dup
