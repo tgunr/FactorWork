@@ -223,8 +223,7 @@ bit "bits" {
 : bit-delete ( bit -- )
     "DELETE FROM bits WHERE id = '"
     over id>> append  "'" append
-    sql-statement set
-    [ sql-statement get sql-query ] with-cncdb
+    [ sql-query ] curry with-cncdb
     2drop ;
                                 
 : bit-where ( clauses -- seq )
