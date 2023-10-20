@@ -8,7 +8,6 @@ USING: accessors cnc db db.sqlite kernel namespaces sequences ;
 
 IN: cnc.db
 
-SYMBOL: sql-statement 
 SYMBOL: cnc-db-path cnc-db-path [ "~/icloud/3CL/Data/cnc.db" ]  initialize
 TUPLE: cnc-db < sqlite-db ;
 
@@ -20,7 +19,6 @@ TUPLE: cnc-db < sqlite-db ;
     '[ <cnc-db> _ with-db ] call ; inline
 
 : do-cncdb ( statement -- result ? )
-    sql-statement set
-    [ sql-statement get sql-query ] with-cncdb
+    [ sql-query ] curry with-cncdb
     dup empty? ;
 
