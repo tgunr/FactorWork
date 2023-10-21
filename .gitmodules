@@ -1,0 +1,3 @@
+[submodule "vscode-factor"]
+	path = vscode-factor
+	url = git@github.com:tgunr/vscode-factor.git
