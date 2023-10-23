@@ -342,6 +342,9 @@ IN: vocabs
 : vwords-sorted ( -- )
     (vwords) natural-sort .vwords ;
 
+: forget-all-words ( -- )
+    [ current-vocab-str vocab-words forget-all ] with-compilation-unit ;
+
 : forget-named-vocab ( vocab-spec -- )
     [ lookup-vocab forget-vocab ] with-compilation-unit ;
 
