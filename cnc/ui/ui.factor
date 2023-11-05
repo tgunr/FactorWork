@@ -5,22 +5,47 @@
 ! Copyright (C) 2023 Dave Carlton.
 ! See http://factorcode.org/license.txt for BSD license.
 
-USING: accessors arrays boids.simulation calendar classes
-colors fonts kernel literals math math.functions
-math.functions models models.range namespaces opengl
-opengl.demo-support opengl.gl sequences threads ui ui.commands
-ui.gadgets ui.gadgets.borders ui.gadgets.buttons
-ui.gadgets.frames ui.gadgets.grids ui.gadgets.labeled
-ui.gadgets.labels ui.gadgets.packs ui.gadgets.scrollers
-ui.gadgets.sliders ui.gadgets.status-bar ui.gadgets.tracks
-ui.gadgets.worlds ui.pixel-formats ui.render ui.tools.common ui.backend
-vocabs ;
+USING: accessors arrays boids.simulation calendar classes colors
+ fonts kernel literals math math.functions models
+ models.range namespaces opengl opengl.demo-support opengl.gl sequences
+ threads ui ui.backend ui.commands ui.gadgets ui.gadgets.borders
+ ui.gadgets.buttons ui.gadgets.editors ui.gadgets.frames ui.gadgets.grids ui.gadgets.labeled ui.gadgets.labels
+ ui.gadgets.packs ui.gadgets.scrollers ui.gadgets.sliders ui.gadgets.status-bar ui.gadgets.tracks ui.gadgets.worlds
+ ui.gestures ui.pixel-formats ui.render ui.tools.common vocabs  ;
+ 
 QUALIFIED-WITH: models.range mr
 IN: cnc.ui
 
+<PRIVATE
+
+TUPLE: tabbing-editor < editor next-editor prev-editor ;
+
+: <tabbing-editor> ( -- editor )
+    tabbing-editor new-editor ;
+
+TUPLE: tabbing-multiline-editor < multiline-editor next-editor prev-editor ;
+
+: <tabbing-multiline-editor> ( -- editor )
+    tabbing-multiline-editor new-editor ;
+
+: com-prev ( editor -- )
+    prev-editor>> [ request-focus ] when* ;
+
+: com-next ( editor -- )
+    next-editor>> [ request-focus ] when* ;
+
+tabbing-editor tabbing-multiline-editor [
+    "editing" f {
+        { T{ key-down f f "TAB" } com-next }
+        { T{ key-down f { S+ } "TAB" } com-prev }
+    } define-command-map
+] bi@
+
+PRIVATE>
+
 SYMBOLS: job-x job-y job-bit job-speed job-feed job-depth job-step ; 
 
-TUPLE: cnc-gadget < gadget xmax ymax bit speed feed depth step ;
+TUPLE: cnc-gadget < track xmax ymax bit speed feed depth step ;
 
 CONSTANT: initial-feed 1000
 CONSTANT: initial-speed 10000
@@ -73,6 +98,7 @@ TUPLE: cnc-frame < pack ;
     cnc-frame new  horizontal >>orientation
     <cnc-gadget>
     cnc-panel  { 5 5 } <border> add-gadget 
+    white-interior 
     ;
 
 TUPLE: navigation < pack ;
@@ -107,6 +133,9 @@ vocab new "●" >>name cnc-root set-global
 : ui-tools-main ( -- )
     t ui-stop-after-last-window? set-global
     environment-window ;
+
+: open-cnc-window ( -- )
+    ui-tools-main ;
 
 ALIAS: cncui ui-tools-main
 
