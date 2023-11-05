@@ -101,43 +101,10 @@ TUPLE: cnc-frame < pack ;
     white-interior 
     ;
 
-TUPLE: navigation < pack ;
-TUPLE: environment < tool ;
-
-environment { 600 300 } set-tool-dim
-
-SYMBOL: cnc-root
-vocab new "●" >>name cnc-root set-global
-
-: <navigation> ( model -- navigation )
-    navigation new swap >>model vertical >>orientation 1 >>fill
-    cnc-panel ;
-
-:: <environment> ( -- gadget )
-    cnc-root get-global <model> :> model
-    vertical environment new-track model >>model
-    model <navigation> <scroller> 1 track-add
-    ;
-
-: environment-window ( -- )
-    [ <environment>  white-interior  "CNC" open-window ] with-ui ; 
-
-: environment-window1 ( -- )
-    [ <environment>
-      <world-attributes> 
-      { windowed double-buffered multisampled
-        T{ samples f 4 } T{ sample-buffers f 1 } }
-      >>pixel-format-attributes        
-      "CNC" >>title open-window ] with-ui ;
-
-: ui-tools-main ( -- )
-    t ui-stop-after-last-window? set-global
-    environment-window ;
-
 : open-cnc-window ( -- )
-    ui-tools-main ;
+    <cnc-frame>  "CNC" open-window  ;
 
-ALIAS: cncui ui-tools-main
+ALIAS: cncui open-cnc-window
 
 MAIN-WINDOW: cnc { { title "CNC" } }
     <cnc-frame> >>gadgets ;
