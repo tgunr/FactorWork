@@ -7,7 +7,7 @@
 
 USING: accessors arrays boids.simulation calendar classes
 colors fonts kernel literals math math.functions
-math.trig models models.range namespaces opengl
+math.functions models models.range namespaces opengl
 opengl.demo-support opengl.gl sequences threads ui ui.commands
 ui.gadgets ui.gadgets.borders ui.gadgets.buttons
 ui.gadgets.frames ui.gadgets.grids ui.gadgets.labeled
@@ -94,14 +94,14 @@ vocab new "●" >>name cnc-root set-global
     ;
 
 : environment-window ( -- )
-    [ <environment> "CNC" open-window ] with-ui ; 
+    [ <environment>  white-interior  "CNC" open-window ] with-ui ; 
 
 : environment-window1 ( -- )
     [ <environment>
       <world-attributes> 
       { windowed double-buffered multisampled
         T{ samples f 4 } T{ sample-buffers f 1 } }
-      >>pixel-format-attributes
+      >>pixel-format-attributes        
       "CNC" >>title open-window ] with-ui ;
 
 : ui-tools-main ( -- )
