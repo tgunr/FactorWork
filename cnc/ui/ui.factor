@@ -53,12 +53,6 @@ CONSTANT: initial-bit 25.4
 CONSTANT: initial-depth 0.5
 CONSTANT: initial-step 60
 
-: <cnc-gadget> ( -- gadget )
-    cnc-gadget new
-    t >>clipped?
-    ${ WIDTH HEIGHT } >>pref-dim
-;
-
 : <12-point-label-control> ( model -- gadget )
     <label-control> sans-serif-font 12 >>size >>font ;
 
@@ -75,36 +69,37 @@ M: range-observer model-changed
     dup cnc-gadget? [ children>> [ cnc-gadget? ] find nip ] unless ;
 PRIVATE>
 
-:: cnc-panel ( cnc-gadget -- gadget )
-    <pile> 
-    2 2 <frame>
-    { 4 4 } >>gap
-    f >>fill?
-    "speed" <label> { 0 0 } grid-add
-    initial-speed 0 0 100 1 mr:<range>
-    horizontal <slider> { 1 0 } grid-add
+: <cnc-gadget> ( -- gadget )
+    vertical cnc-gadget new-track
+    0 >>fill
+    { 10 10 } >>gap
+    
+    <pile> ! Create a container to hold all the elements
 
-    "feed" <label> { 0 1 } grid-add
-    initial-feed 0 1 100 1 mr:<range>
-    horizontal <slider> { 1 1 } grid-add
+    2 2 <frame> ! Create a frame with a 2x2 grid layout
+    { 4 4 } >>gap ! Set the gap between the elements in the grid
+    f >>fill? ! Check if the frame should fill the available space
+    "speed" <label> { 0 0 } grid-add ! Add a label with the text "speed" to the grid at position (0, 0)
+    initial-speed 0 0 100 1 mr:<range> ! Add a range input with the value "initial-speed" and range from 0 to 100 with a step of 1
+    horizontal <slider> { 1 0 } grid-add ! Add a horizontal slider to the grid at position (1, 0)
+    "feed" <label> { 0 1 } grid-add ! Add a label with the text "feed" to the grid at position (0, 1)
+    initial-feed 0 1 100 1 mr:<range> ! Add a range input with the value "initial-feed" and range from 0 to 100 with a step of 1
+    horizontal <slider> { 1 1 } grid-add ! Add a horizontal slider to the grid at position (1, 1)
+    { 5 5 } <border> ! Create a border with a size of 5x5
+    add-gadget ! Add the border as a gadget to the frame
 
-    { 5 5 } <border> add-gadget
+    add-gadget ! Add the frame as a gadget to the pile
 ;
     ! "cnc" COLOR: dark-slate-grey <framed-labeled-gadget> ;
 
-TUPLE: cnc-frame < pack ;
-
-: <cnc-frame> ( -- cnc-frame )
-    cnc-frame new  horizontal >>orientation
-    <cnc-gadget>
-    cnc-panel  { 5 5 } <border> add-gadget 
-    white-interior 
-    ;
-
 : open-cnc-window ( -- )
-    <cnc-frame>  "CNC" open-window  ;
+    <cnc-gadget>  
+    ${ WIDTH HEIGHT } >>pref-dim
+    { 5 5 } <border> { 1 1 } >>fill
+    white-interior
+    "CNC" open-window  ;
 
 ALIAS: cncui open-cnc-window
 
 MAIN-WINDOW: cnc { { title "CNC" } }
-    <cnc-frame> >>gadgets ;
+    <cnc-gadget> >>gadgets ;
