@@ -135,3 +135,16 @@ INITIALIZED-SYMBOL: cnc-root [ vocab new "●" >>name ]
     [ <environment> "Resurface" open-window ] with-ui ; 
 
 ALIAS: ew environment-window
+
+: <navigation1> ( -- navigation )
+    pack new vertical >>orientation 1 >>fill
+    ;
+
+: <environment1> ( -- gadget )
+    vertical pack new-track 
+;
+
+: gadget-window ( -- )
+    [ tool new "Factor Gadgets" open-window ] with-ui ; 
+
+ALIAS: gw gadget-window 
