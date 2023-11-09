@@ -14,7 +14,15 @@ USING: accessors arrays assocs boids.simulation classes colors
  ui.gadgets.worlds ui.gestures ui.private ui.text ui.tools.browser ui.tools.common
  ui.tools.deploy vocabs.loader vocabs.metadata  ;
  
+IN: ui.gadgets.borders
+
+TUPLE: colored-border < border { color initial: contents-color } ;
+
+: <colored-border> ( child gap color -- border )
+    [ colored-border new-border ] 2dip  [ >>size ] dip  <solid> >>interior  ;
+
 QUALIFIED-WITH: models.range mr
+
 IN: cnc.ui
 
 <PRIVATE
@@ -57,7 +65,7 @@ TUPLE: cnc-gadget < track settings
     { ymax initial: 812.8 }
     { zmax initial: -163.0 }
     { bit initial:  0.0635 }
-    { speed initial: 15000 }
+    { speed initial: "15000" }
     { feed initial: 2500 }
     { depth initial: 0.1 }
     { stepover initial: 60 }
@@ -120,7 +128,7 @@ CONSTANT: start-position-options {
     add-range-gadgets
 ;
 
-: default-config ( -- assoc )
+: default-config1 ( -- assoc )
     H{ 
         { "X" 0 }
         { "Y" 0 }
@@ -130,6 +138,17 @@ CONSTANT: start-position-options {
         { "Spindle" 0 }
         { "Feed Rate" 0 }
         { "Stepover %" 0 }
+    } ;
+
+: default-config ( -- assoc )
+    H{ 
+        { job-x "0" }
+        { job-y "0" }
+        { job-bit "0" }
+        { job-speed "15000" }
+        { job-feed "0" }
+        { job-depth "0" }
+        { job-step "0" }   
     } ;
 
 : cnc-config-path ( vocab -- path/f )
@@ -159,9 +178,12 @@ CONSTANT: start-position-options {
 : find-cnc-settings ( gadget -- settings )
     find-cnc-gadget settings>> ;
 
-: speed-field ( cnc-gadget gadget -- cnc-gadget gadget )
-B    over speed>> <model-field>
-    "Speed:" label-on-left add-gadget ;
+: speed-field ( gadget -- gadget )
+    job-speed get <model-field>
+    "Speed:" label-on-left
+    ! { 2 2 } "red" named-color <colored-border>
+    { 2 2 } <border>
+    add-gadget ;
     
 : speed-pile ( gadget -- gadget )
     <pile> ! Create a container to hold all the elements
@@ -188,11 +210,11 @@ B    over speed>> <model-field>
 : cnc-settings-theme ( gadget -- gadget )
     { 10 10 } >>gap  1 >>fill ;
 
-: <cnc-settings> ( parent -- gadget )
+: <cnc-settings> ( -- gadget )
     "cnc.ui" cnc-config [ <model> ]  assoc-map
     [ <pile> 
-      swap speed>> <model-field>
-      "Speed:" label-on-left add-gadget 
+      speed-field
+      job-x get "Check" <checkbox> add-gadget
       cnc-settings-theme
       namespace <mapping> >>model
     ] with-variables ; 
@@ -225,18 +247,18 @@ cnc-gadget "toolbar" f {
     { f com-save }
 } define-command-map
 
-: <cnc-gadget> ( -- gadget )
+: <cnc-gadget> ( -- cnc-gadget )
     cnc-gadget new  vertical >>orientation
-    dup <cnc-settings> >>settings 
+    dup <toolbar> { 10 10 } >>gap add-gadget 
+    <cnc-settings> >>settings 
     dup settings>> add-gadget
-    ! dup <toolbar> { 10 10 } >>gap add-gadget
     deploy-settings-theme
     dup com-revert ;    
 
 : cnc-tool ( -- )
     <cnc-gadget> 
     ${ WIDTH HEIGHT } >>pref-dim
-    { 5 5 } <border> { 1 1 } >>fill
+    { 15 15 } <border> { 1 1 } >>fill
     white-interior
     <world-attributes> "CNC" >>title
     [ { dialog-window } append ] change-window-controls
