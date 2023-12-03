@@ -4,15 +4,14 @@
 ! Description: Another fine Factor file!
 ! Copyright (C) 2023 Dave Carlton.
 ! See http://factorcode.org/license.txt for BSD license.
-USING: accessors arrays assocs boids.simulation classes colors
- debugger fonts help.markup help.syntax kernel literals
- math math.parser math.rectangles models models.arrow models.mapping
- namespaces parser prettyprint prettyprint.config quotations sequences
- splitting strings ui ui.backend ui.commands ui.gadgets
- ui.gadgets.books ui.gadgets.borders ui.gadgets.buttons ui.gadgets.editors ui.gadgets.frames ui.gadgets.grids
- ui.gadgets.labels ui.gadgets.packs ui.gadgets.private ui.gadgets.sliders ui.gadgets.toolbar ui.gadgets.tracks
- ui.gadgets.worlds ui.gestures ui.private ui.text ui.tools.browser ui.tools.common
- ui.tools.deploy vocabs.loader vocabs.metadata  ;
+USING: accessors arrays assocs boids.simulation classes colors fonts
+kernel literals math math.parser models models.arrow models.mapping
+namespaces parser prettyprint prettyprint.config sequences splitting
+ui ui.commands ui.gadgets ui.gadgets.buttons ui.gadgets.editors
+ui.gadgets.frames ui.gadgets.grids ui.gadgets.labels ui.gadgets.packs
+ui.gadgets.sliders ui.gadgets.toolbar ui.gadgets.tracks
+ui.gadgets.worlds ui.gestures ui.pens.solid ui.theme ui.tools.browser
+ui.tools.common ui.tools.deploy vocabs.metadata ;
  
 IN: ui.gadgets.borders
 
@@ -181,8 +180,8 @@ CONSTANT: start-position-options {
 : speed-field ( gadget -- gadget )
     job-speed get <model-field>
     "Speed:" label-on-left
-    ! { 2 2 } "red" named-color <colored-border>
-    { 2 2 } <border>
+    { 20 20 } "red" named-color <colored-border>
+    { 2 2 } <filled-border> { 20 20 } >>size { 0 0 } >>fill
     add-gadget ;
     
 : speed-pile ( gadget -- gadget )
@@ -249,19 +248,80 @@ cnc-gadget "toolbar" f {
 
 : <cnc-gadget> ( -- cnc-gadget )
     cnc-gadget new  vertical >>orientation
-    dup <toolbar> { 10 10 } >>gap add-gadget 
+    dup <toolbar> { 20 10 } >>gap
+    ! { 20 20 } <filled-border> { 20 20 } >>size { 0 0 } >>fill
+    add-gadget 
     <cnc-settings> >>settings 
     dup settings>> add-gadget
     deploy-settings-theme
     dup com-revert ;    
 
-: cnc-tool ( -- )
-    <cnc-gadget> 
+: layout-gadget ( -- track )
+    vertical <track>  { 5 5 } >>gap  with-lines 
+    "{ 20 0 } <border>" <label>
+    ! { 20 20 } "blue" named-color <colored-border> f track-add
+    "red" <model-field>  
+    ! { 2 2 } "green" named-color <colored-border>
+    f track-add 
+    ! swap [ editor-string . ] <arrow> <label-control>
+    ! f track-add
+    ;
+
+: pack-gadget ( -- )
+    ! track new  vertical >>orientation
+    <pile>
+
+    ! "This is a pile of labels showing the differences between different border types."
+    ! "Title" <labeled-gadget>
+    ! f add-track
+    
+    <shelf>
+    "{ 20 0 } <border>" <label>
+    { 20 0 } "green" named-color <colored-border>
+    add-gadget
+    
+    "{ 0 20 } <border>" <label>
+    { 0 20 } "blue" named-color <colored-border>
+    add-gadget
+    
+    "{ 20 20 } <border>" <label>
+    { 20 20 } "red" named-color <colored-border>
+    add-gadget
+    
+    { 20 20 } "gray50" named-color <colored-border> 
+    add-gadget
+    
+    "{ 20 0 } <border>" <label>
+    { 20 0 } "green" named-color <colored-border>
+    add-gadget
+    
+    "{ 0 20 } <border>" <label>
+    { 0 20 } "blue" named-color <colored-border>
+    add-gadget
+    
+    "{ 20 20 } <border>" <label>
+    { 20 20 } "red" named-color <colored-border>
+    add-gadget
+
+    ! "Hello, world 3" <label>
+    ! { 40 40 } <filled-border> { 20 20 } >>size { 1 1 } >>fill
+    ! add-gadget
+    
+    ! >>gadgets 
+    !  <pile>
+    !  dup <toolbar> { 20 10 } >>gap 
+    <world-attributes> "TEST" >>title
     ${ WIDTH HEIGHT } >>pref-dim
-    { 15 15 } <border> { 1 1 } >>fill
+    open-window
+    ;
+
+: cnc-tool ( -- )
+    layout-gadget 
+    ${ WIDTH HEIGHT } >>pref-dim
+    ! { 15 15 } <border> { 1 1 } >>fill
     white-interior
     <world-attributes> "CNC" >>title
-    [ { dialog-window } append ] change-window-controls
+    ! [ { dialog-window } append ] change-window-controls
     open-window ;
 
 ALIAS: cncui cnc-tool
