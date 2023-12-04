@@ -1,6 +1,0 @@
-[submodule "vscode-factor"]
-	path = vscode-factor
-	url = git@github.com:tgunr/vscode-factor.git
-[submodule "factor-gadgets"]
-	path = factor-gadgets
-	url = git@github.com:tgunr/factor-gadgets.git

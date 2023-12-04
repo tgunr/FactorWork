@@ -259,9 +259,9 @@ cnc-gadget "toolbar" f {
 : layout-gadget ( -- track )
     vertical <track>  { 5 5 } >>gap  with-lines 
     "{ 20 0 } <border>" <label>
-    ! { 20 20 } "blue" named-color <colored-border> f track-add
+    { 20 20 } "blue" named-color <colored-border> f track-add
     "red" <model-field>  
-    ! { 2 2 } "green" named-color <colored-border>
+    { 2 2 } "green" named-color <colored-border>
     f track-add 
     ! swap [ editor-string . ] <arrow> <label-control>
     ! f track-add
