@@ -5,13 +5,13 @@
 ! Copyright (C) 2013 Dave Carlton.
 ! See http://factorcode.org/license.txt for BSD license.
 
-USING: accessors folder io.files io.files.private kernel libc locals
-prettyprint sequences ;
+USING: accessors folder io.files io.files.private kernel libc
+prettyprint sequences string ;
 
 IN: io.directories
 :: force-file-into ( from to -- )
     from to to-directory :> to
-    to exists?
+    to file-exists?
     [ "rm -fr " to append  system drop ] when
     from to move-file  drop ;
 
@@ -24,10 +24,10 @@ CONSTANT: srcFolder "/Sources/PlayNet/SVN/ww2/branches"
 CONSTANT: gitFolder "/Sources/PlayNet/ww2"
 
 : src-folder ( -- seq )
-    srcFolder string-to-folder ; 
+    srcFolder >folder ; 
 
 :: mv-entries ( entries dst -- )
-    entries [ path+name ] map  dst force-files-into ;
+    entries [ pathname>> ] map  dst force-files-into ;
 
 :: update-git ( entry -- )
     entry name>> :> gitName
@@ -37,21 +37,13 @@ CONSTANT: gitFolder "/Sources/PlayNet/ww2"
 
 :: do-entry ( entry -- )
     entry is-directory?
-    [ entry path+name pprint
+    [ entry pathname>> pprint
       entry folder-entries  gitFolder mv-entries
       entry update-git
-      entry path+name "rm -fr " prepend  system drop ] when
+      entry pathname>> "rm -fr " prepend  system drop ] when
     ;
 
 : do-src-folders ( -- )
-    src-folder [ do-entry ] with-folder-entries ; 
+    src-folder [ do-entry ] with-folder-filenames ; 
 
-: file-entries ( folder -- file )
-    dup is-directory? [ [ file-entries ] with-folder-entries ] when ;
-
-: flatten-folder ( path -- seq )
-    string-to-folder  file-entries ;
-
-: test ( -- seq )
-    "/usr" flatten-folder ; 
       
