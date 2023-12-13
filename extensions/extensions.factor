@@ -1,17 +1,14 @@
 ! Copyright (C) 2012 PolyMicro Systems.
 ! See http://factorcode.org/license.txt for BSD license.
 
-USING: accessors alien.c-types alien.data assocs byte-arrays byte-vectors
- cocoa.classes colors compiler.units core-graphics.types definitions editors
- effects effects.parser endian extensions fonts fry
- help.vocabs hints io io.encodings.utf8 io.files io.standard-paths
- kernel kernel.private lexer locals macros make
- math math.order math.parser namespaces parser prettyprint.sections
- regexp sequences sequences.private serialize slots.private sorting
- splitting.extras strings strings.parser system tools.scaffold tr
- typed ui.clipboards ui.commands ui.gestures ui.text ui.tools.browser
- ui.tools.common ui.tools.listener variables vocabs.loader vocabs.parser words
-    ;
+USING: accessors alien.c-types alien.data assocs byte-arrays
+byte-vectors cocoa.classes colors compiler.units definitions endian
+fonts help.vocabs hints io io.encodings.utf8 io.files kernel
+kernel.private lexer make math math.order math.parser namespaces
+parser prettyprint.sections regexp sequences slots.private sorting
+splitting.extras strings.parser system tr typed ui.clipboards
+ui.gadgets ui.gadgets.packs ui.gadgets.worlds ui.text ui.tools.browser
+ui.tools.common ui.tools.listener vocabs.loader vocabs.parser words ;
 
 IN: extensions
 CONSTANT: EXTENSIONS t
@@ -421,4 +418,21 @@ IN: scratchpad
     "" [ 1 + 6 mod 0 = [ "\n" append ] when  " " append append ] reduce-index
     "USING: " prepend " ;" append
     clipboard get set-clipboard-contents ;
+
+IN: color-picker
+: <pack-color-picker> ( constructor -- gadget )
+    vertical <pack> { 5 5 } >>gap swap <color-sliders>
+    [ add-gadget ] dip
+    [ <color-preview>  add-gadget ]
+    [ <color-status> add-gadget ] bi ;
+
+: pack-color-picker-window ( -- )
+    [
+        f
+        T{ world-attributes { title "Color Picker" } }
+        clone
+        [ <pack-color-picker> ] <color-tabs>
+        >>gadgets
+        open-window
+    ] with-ui ;
 
