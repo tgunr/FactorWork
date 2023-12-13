@@ -4,14 +4,14 @@
 ! Description: Another fine Factor file!
 ! Copyright (C) 2023 Dave Carlton.
 ! See http://factorcode.org/license.txt for BSD license.
-USING: accessors arrays assocs boids.simulation classes colors fonts
-kernel literals math math.parser models models.arrow models.mapping
+USING: accessors arrays assocs boids.simulation classes fonts kernel
+literals math math.parser models models.arrow models.mapping
 namespaces parser prettyprint prettyprint.config sequences splitting
-ui ui.commands ui.gadgets ui.gadgets.buttons ui.gadgets.editors
-ui.gadgets.frames ui.gadgets.grids ui.gadgets.labels ui.gadgets.packs
-ui.gadgets.sliders ui.gadgets.toolbar ui.gadgets.tracks
-ui.gadgets.worlds ui.gestures ui.pens.solid ui.theme ui.tools.browser
-ui.tools.common ui.tools.deploy vocabs.metadata ;
+ui ui.commands ui.gadgets ui.gadgets.buttons
+ui.gadgets.buttons.private ui.gadgets.editors ui.gadgets.frames
+ui.gadgets.grids ui.gadgets.labels ui.gadgets.packs ui.gadgets.sliders
+ui.gadgets.tracks ui.gadgets.worlds ui.gestures ui.pens.solid ui.theme
+ui.tools.browser ui.tools.common ui.tools.deploy vocabs.metadata ;
  
 IN: ui.gadgets.borders
 
@@ -51,7 +51,7 @@ tabbing-editor tabbing-multiline-editor [
 
 PRIVATE>
 
-SYMBOLS: job-x job-y job-bit job-speed job-feed job-depth job-step ; 
+SYMBOLS: job-units job-x job-y job-bit job-speed job-feed job-depth job-step job-delay job-start-position job-direction ;
 
 CONSTANT: initial-feed 1000
 CONSTANT: initial_spindle_speed 15000
@@ -122,6 +122,21 @@ CONSTANT: start-position-options {
     { 5 "Upper Right" } 
 }
 
+CONSTANT: direction-options { 
+    { 1 "Horizontal" } 
+    { 2 "Vertical" }
+}
+
+CONSTANT: delay-options { 
+    { 1 "Y" } 
+    { 2 "N" }
+}
+
+CONSTANT: units-options { 
+    { 1 "inch" } 
+    { 2 "mm" }
+}
+
 : build-frame ( -- frame )
     3 8 <frame>  { 4 4 } >>gap  syntax:f >>fill?  
     add-range-gadgets
@@ -140,14 +155,18 @@ CONSTANT: start-position-options {
     } ;
 
 : default-config ( -- assoc )
-    H{ 
+    H{
+        { job-units "inch" }
         { job-x "0" }
         { job-y "0" }
-        { job-bit "0" }
+        { job-bit "1.125" }
         { job-speed "15000" }
-        { job-feed "0" }
-        { job-depth "0" }
-        { job-step "0" }   
+        { job-feed "400" }
+        { job-depth "0.0625" }
+        { job-step "40" }   
+        { job-delay "y" }
+        { job-start-position "Center" }
+        { job-direction "Horizontal" }
     } ;
 
 : cnc-config-path ( vocab -- path/f )
@@ -177,30 +196,6 @@ CONSTANT: start-position-options {
 : find-cnc-settings ( gadget -- settings )
     find-cnc-gadget settings>> ;
 
-: speed-field ( gadget -- gadget )
-    job-speed get <model-field>
-    "Speed:" label-on-left
-    { 20 20 } "red" named-color <colored-border>
-    { 2 2 } <filled-border> { 20 20 } >>size { 0 0 } >>fill
-    add-gadget ;
-    
-: speed-pile ( gadget -- gadget )
-    <pile> ! Create a container to hold all the elements
-    3 2 <frame> ! Create a frame with a 2x2 grid layout
-    { 4 4 } >>gap ! Set the gap between the elements in the grid
-    f >>fill? ! Check if the frame should fill the available space
-
-    "speed" <label> { 0 0 } grid-add ! Add a label with the text "speed" to the grid at position (0, 0)
-    initial_spindle_speed 0 0 100 1 mr:<range> ! Add a range input with the value "initial-speed" and range from 0 to 100 with a step of 1
-    horizontal <slider> { 1 0 } grid-add ! Add a horizontal slider to the grid at position (1, 0)
-    "feed" <label> { 0 1 } grid-add ! Add a label with the text "feed" to the grid at position (0, 1)
-    initial-feed 0 1 100 1 mr:<range> ! Add a range input with the value "initial-feed" and range from 0 to 100 with a step of 1
-    horizontal <slider> { 1 1 } grid-add ! Add a horizontal slider to the grid at position (1, 1)
-    { 5 5 } <border> ! Create a border with a size of 5x5
-    add-gadget ! Add the border as a gadget to the frame
-    add-gadget ! Add the frame as a gadget to the pile
-    ; 
-
 : cnc-settings ( parent -- gadget )
     ! "CNC Settings" <label> add-gadget
     ! start-position get  start-position-options <radio-buttons> add-gadget
@@ -211,9 +206,24 @@ CONSTANT: start-position-options {
 
 : <cnc-settings> ( -- gadget )
     "cnc.ui" cnc-config [ <model> ]  assoc-map
-    [ <pile> 
-      speed-field
-      job-x get "Check" <checkbox> add-gadget
+    [ vertical track new-track
+      job-units get units-options
+      <shelf>
+      "Units: " <label> add-gadget
+      [ <radio-button> ] <radio-controls>  { 5 5 } >>gap  f track-add
+      horizontal track new-track
+      job-x get <model-field> "X:" label-on-left f track-add
+      job-y get <model-field> "Y:" label-on-left f track-add
+      f track-add
+      job-depth get <model-field> "Cut Depth:" label-on-left f track-add
+      job-bit get <model-field> "Bit Diameter:" label-on-left f track-add
+      job-speed get <model-field> "Spindle Speed:" label-on-left f track-add
+      job-feed get <model-field> "Feed Rate:" label-on-left f track-add
+      job-step get <model-field> "Stepover %:" label-on-left f track-add
+      job-delay get <model-field> "Delay:" label-on-left f track-add
+      job-start-position get <model-field> "Start Position:" label-on-left f track-add
+      job-direction get <model-field> "Direction:" label-on-left f track-add
+      
       cnc-settings-theme
       namespace <mapping> >>model
     ] with-variables ; 
@@ -247,80 +257,18 @@ cnc-gadget "toolbar" f {
 } define-command-map
 
 : <cnc-gadget> ( -- cnc-gadget )
-    cnc-gadget new  vertical >>orientation
-    dup <toolbar> { 20 10 } >>gap
-    ! { 20 20 } <filled-border> { 20 20 } >>size { 0 0 } >>fill
-    add-gadget 
+    vertical cnc-gadget new-track with-lines
     <cnc-settings> >>settings 
-    dup settings>> add-gadget
+    dup settings>> f track-add
     deploy-settings-theme
     dup com-revert ;    
 
-: layout-gadget ( -- track )
-    vertical <track>  { 5 5 } >>gap  with-lines 
-    "{ 20 0 } <border>" <label>
-    { 20 20 } "blue" named-color <colored-border> f track-add
-    "red" <model-field>  
-    { 2 2 } "green" named-color <colored-border>
-    f track-add 
-    ! swap [ editor-string . ] <arrow> <label-control>
-    ! f track-add
-    ;
-
-: pack-gadget ( -- )
-    ! track new  vertical >>orientation
-    <pile>
-
-    ! "This is a pile of labels showing the differences between different border types."
-    ! "Title" <labeled-gadget>
-    ! f add-track
-    
-    <shelf>
-    "{ 20 0 } <border>" <label>
-    { 20 0 } "green" named-color <colored-border>
-    add-gadget
-    
-    "{ 0 20 } <border>" <label>
-    { 0 20 } "blue" named-color <colored-border>
-    add-gadget
-    
-    "{ 20 20 } <border>" <label>
-    { 20 20 } "red" named-color <colored-border>
-    add-gadget
-    
-    { 20 20 } "gray50" named-color <colored-border> 
-    add-gadget
-    
-    "{ 20 0 } <border>" <label>
-    { 20 0 } "green" named-color <colored-border>
-    add-gadget
-    
-    "{ 0 20 } <border>" <label>
-    { 0 20 } "blue" named-color <colored-border>
-    add-gadget
-    
-    "{ 20 20 } <border>" <label>
-    { 20 20 } "red" named-color <colored-border>
-    add-gadget
-
-    ! "Hello, world 3" <label>
-    ! { 40 40 } <filled-border> { 20 20 } >>size { 1 1 } >>fill
-    ! add-gadget
-    
-    ! >>gadgets 
-    !  <pile>
-    !  dup <toolbar> { 20 10 } >>gap 
-    <world-attributes> "TEST" >>title
-    ${ WIDTH HEIGHT } >>pref-dim
-    open-window
-    ;
-
 : cnc-tool ( -- )
-    layout-gadget 
-    ${ WIDTH HEIGHT } >>pref-dim
+    <cnc-gadget>  
     ! { 15 15 } <border> { 1 1 } >>fill
     white-interior
     <world-attributes> "CNC" >>title
+    ${ WIDTH HEIGHT } >>pref-dim
     ! [ { dialog-window } append ] change-window-controls
     open-window ;
 
