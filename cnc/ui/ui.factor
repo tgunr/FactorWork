@@ -10,7 +10,7 @@ namespaces parser prettyprint prettyprint.config sequences splitting
 ui ui.commands ui.gadgets ui.gadgets.buttons
 ui.gadgets.buttons.private ui.gadgets.editors ui.gadgets.frames
 ui.gadgets.grids ui.gadgets.labels ui.gadgets.packs ui.gadgets.sliders
-ui.gadgets.tracks ui.gadgets.worlds ui.gestures ui.pens.solid ui.theme
+ui.gadgets.tracks ui.gadgets.worlds ui.gadgets.toolbar ui.gestures ui.pens.solid ui.theme
 ui.tools.browser ui.tools.common ui.tools.deploy vocabs.metadata ;
  
 IN: ui.gadgets.borders
@@ -51,8 +51,6 @@ tabbing-editor tabbing-multiline-editor [
 
 PRIVATE>
 
-SYMBOLS: job-units job-x job-y job-bit job-speed job-feed job-depth job-step job-delay job-start-position job-direction ;
-
 CONSTANT: initial-feed 1000
 CONSTANT: initial_spindle_speed 15000
 CONSTANT: initial_bit_diameter 25.4
@@ -68,6 +66,9 @@ TUPLE: cnc-gadget < track settings
     { feed initial: 2500 }
     { depth initial: 0.1 }
     { stepover initial: 60 }
+    { delay initial: "y" }
+    { start-position initial: "Center" }
+    { direction initial: "Horizontal" }
     ;
 
 INITIALIZED-SYMBOL: gadget-position [ 0 ]
@@ -142,31 +143,23 @@ CONSTANT: units-options {
     add-range-gadgets
 ;
 
-: default-config1 ( -- assoc )
-    H{ 
-        { "X" 0 }
-        { "Y" 0 }
-        { "Cut Depth" 0 }
-        { "Max Depth" 0 }
-        { "Bit Diameter" 0 }
-        { "Spindle" 0 }
-        { "Feed Rate" 0 }
-        { "Stepover %" 0 }
-    } ;
+SYMBOLS: job-units job-x job-y job-bit job-flutes job-speed job-feed job-depth job-step job-delay job-start-position job-direction job-chipload ;
 
 : default-config ( -- assoc )
     H{
-        { job-units "inch" }
+        { job-units 2 }
         { job-x "0" }
         { job-y "0" }
         { job-bit "1.125" }
+        { job-flutes "2" }
         { job-speed "15000" }
         { job-feed "400" }
         { job-depth "0.0625" }
         { job-step "40" }   
-        { job-delay "y" }
-        { job-start-position "Center" }
+        { job-delay t }
+        { job-start-position "Lower Left" }
         { job-direction "Horizontal" }
+        { job-chipload "0" }
     } ;
 
 : cnc-config-path ( vocab -- path/f )
@@ -204,26 +197,50 @@ CONSTANT: units-options {
 : cnc-settings-theme ( gadget -- gadget )
     { 10 10 } >>gap  1 >>fill ;
 
+: units-setting ( track -- track )
+    job-units get units-options
+    <shelf>
+    "Units: " <label> add-gadget
+    [ <radio-button> ] <radio-controls>  { 5 5 } >>gap  f track-add
+    ;
+
+: xy-setting ( track -- track )
+    horizontal track new-track
+    job-x get <model-field> "X:" label-on-left 1/4 track-add
+    job-y get <model-field> "Y:" label-on-left 1/4 track-add
+    job-depth get <model-field> "Cut Depth:" label-on-left 1/4 track-add
+    <gadget> 1/4 track-add
+    f track-add
+    ;
+
+: bit-setting ( track -- track )
+    horizontal track new-track
+    job-bit get <model-field> "Bit Diameter:" label-on-left 1/4 track-add
+    job-speed get <model-field> "Spindle Speed:" label-on-left 1/4 track-add
+    job-flutes get <model-field> "Flutes:" label-on-left 1/4 track-add
+    <gadget> 1/16 track-add
+    job-delay get <model> "Delay:" <checkbox> 1/8 track-add
+    f track-add
+    ;
+
+: feed-setting ( track -- track )
+    horizontal track new-track
+    job-feed get <model-field> "Feed Rate:" label-on-left 1/4 track-add
+    job-step get <model-field> "Stepover %:" label-on-left 1/4 track-add
+    <gadget> 1/4 track-add
+    f track-add
+    ;
+
 : <cnc-settings> ( -- gadget )
     "cnc.ui" cnc-config [ <model> ]  assoc-map
     [ vertical track new-track
-      job-units get units-options
-      <shelf>
-      "Units: " <label> add-gadget
-      [ <radio-button> ] <radio-controls>  { 5 5 } >>gap  f track-add
-      horizontal track new-track
-      job-x get <model-field> "X:" label-on-left f track-add
-      job-y get <model-field> "Y:" label-on-left f track-add
-      f track-add
-      job-depth get <model-field> "Cut Depth:" label-on-left f track-add
-      job-bit get <model-field> "Bit Diameter:" label-on-left f track-add
-      job-speed get <model-field> "Spindle Speed:" label-on-left f track-add
-      job-feed get <model-field> "Feed Rate:" label-on-left f track-add
-      job-step get <model-field> "Stepover %:" label-on-left f track-add
-      job-delay get <model-field> "Delay:" label-on-left f track-add
+      units-setting
+      xy-setting
+      bit-setting
+      feed-setting
       job-start-position get <model-field> "Start Position:" label-on-left f track-add
       job-direction get <model-field> "Direction:" label-on-left f track-add
-      
+      job-chipload get <model-field> "Chipload:" label-on-left f track-add
       cnc-settings-theme
       namespace <mapping> >>model
     ] with-variables ; 
@@ -260,6 +277,7 @@ cnc-gadget "toolbar" f {
     vertical cnc-gadget new-track with-lines
     <cnc-settings> >>settings 
     dup settings>> f track-add
+    add-toolbar
     deploy-settings-theme
     dup com-revert ;    
 
