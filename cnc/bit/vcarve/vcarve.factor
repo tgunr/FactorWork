@@ -90,6 +90,8 @@ vcarve-bit "vcarve-bits" {
     nip pprint nl
 ;
 
+SYMBOL: sql-statement sql-statement [ "" ] initialize
+
 : vcarve-bits ( -- vcarve-bits )
     vcarve-preamble sql-statement set
     [ sql-statement get sql-query ] with-vcarvedb

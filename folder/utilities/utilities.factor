@@ -13,7 +13,7 @@ IN: folder.utilities
 VAR: downloads
 
 :: move-to ( folder-entry directory -- )
-    folder-entry pathname>>
+    folder-entry folder:pathname>>
     downloads path>>  as-directory
     directory append as-directory
     folder-entry name>> append

@@ -92,7 +92,7 @@ TUPLE: file-compare file1-path file2-path file1-content file2-content ;
  ;
 
 : write-file ( seq file -- )
-    normalize-path dup exists?
+    normalize-path dup file-exists?
     [ dup delete-file ] when
     utf8 set-file-lines
     ;

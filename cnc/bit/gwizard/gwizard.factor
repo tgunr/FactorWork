@@ -35,7 +35,7 @@ TUPLE: gw-csv slot description serialno tool generic geometry flutes
     over tool>> >>tool_type  
     over geometry>> >>bit_type  
     over diameter>> >>diameter  
-    over stepdown >>stepdown
+    over diameter>> >>stepdown
     over stepover>> >>stepover
     over stepover>> >>spindle_speed
     over stepover>> >>spindle_dir

@@ -1,8 +1,10 @@
 ! Copyright (C) 2011 PolyMicro Systems.
 ! See http://factorcode.org/license.txt for BSD license.
 USING: accessors folder io io.directories io.files io.files.info
-io.files.links io.files.private io.files.types io.pathnames kernel
-locals namespaces regexp sequences ;
+io.files.links io.files.private io.files.types io.pathnames
+kernel locals namespaces regexp sequences string ;
+FROM: io.directories => link-to-current-directory
+directory-entries ;
 
 IN: dropbox
 
@@ -13,21 +15,21 @@ CONSTANT: user-library-folder "~/Library"
 CONSTANT: db-appsupport-name  "Application\ Support"
 CONSTANT: db-preferences-name "Preferences"
 
-:: db-is-linked-to-db? ( symlink -- ? )
-    "Dropbox" symlink read-link start
+:: db-is-linked-to-db? ( symlink -- ? ? )
+    "Dropbox" symlink read-link  B
     [ " to Dropbox" print f ]
     [ " but not to Dropbox" print symlink move-aside t ] if
     ;
 
 :: db-check-symbolic? ( path -- ? )
     path link-info type>> +symbolic-link+ =
-    [ ", is symbolic" write  path db-is-linked-to-db? ]
+    [ ", is symbolic" write  path db-is-linked-to-db? drop ]
     [ " , move aside" print  path move-aside t ] if
     ;
 
 :: db-moved-path? ( path -- ? )
     path write
-    path exists?
+    path file-exists?
     [ " path exists" write path db-check-symbolic? ]
     [ " no path, will link it" print t ] if
     ;
@@ -36,7 +38,6 @@ CONSTANT: db-preferences-name "Preferences"
     user-library-folder  "/" append
     ;
 
-FROM: folder => pathname ;
 : link-to-cwd ( seq -- )
     [ dup name>> cwd as-directory prepend
       db-moved-path? 
@@ -86,11 +87,10 @@ FROM: io.directories => link-to-current-directory directory-entries ;
     [ db-process-item ] [ drop ] if
     ;
 
-FROM: string => to-folder ;
 : db-main ( -- )
-    db-library-folder exists?
+    db-library-folder file-exists?
     [
-        db-library-folder to-folder folder-entries
+        db-library-folder >folder folder-entries
         [ db-library-item ] each
     ] [
         "The folder " db-library-folder append

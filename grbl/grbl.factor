@@ -36,20 +36,20 @@ grbl-gadget "toolbar" f {
 : <comm-listen-pane> ( grbl-gadget -- gadget )
     model>> [ [ print ] curry try ]  <pane-control> ;
 
-: add-comm-listen-pane ( track -- track )
+: add-comm-listen-pane ( x x track -- track )
     <comm-listen-pane> margins  <scroller> >>scroller
     scroller>> white-interior  1 track-add ;
 
-: <grbl-gadget> ( -- gadget )
+: <grbl-gadget> ( x x -- gadget )
     vertical grbl-gadget  new-track with-lines  1 >>fill
     add-grbl-toolbar add-comm-listen-pane ;
 
-: (grbl-window) ( -- )
+: (grbl-window) ( x x -- )
     <grbl-gadget> <world-attributes>  "GRBL" >>title
     open-status-window
     ;
 
-: grbl-window ( -- )  (grbl-window) ;
+: grbl-window ( x x  -- )  (grbl-window) ;
 
 MAIN-WINDOW: grbl
         {

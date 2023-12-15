@@ -4,16 +4,17 @@
 ! Description: Gadget playground
 ! Copyright (C) 2022 Dave Carlton.
 ! See http://factorcode.org/license.txt for BSD license.
-USING: accessors arrays assocs classes.tuple cnc.tools.resurface.ui io
- kernel math math.parser models models.arrow models.mapping
- namespaces pmlog sequences ui ui.gadgets ui.gadgets.borders
- ui.gadgets.buttons ui.gadgets.frames ui.gadgets.grids ui.gadgets.labels ui.gadgets.packs ui.gadgets.scrollers
- ui.gadgets.sliders ui.gadgets.tracks ui.gadgets.world ui.gadgets.worlds ui.tools.common vocabs
-  ;
-
-IN: gadget-play
-
+USING: accessors arrays assocs classes.tuple
+cnc.tools.resurface.ui documents io kernel math math.parser
+models models.arrow models.mapping models.product namespaces
+pmlog sequences ui ui.gadgets ui.gadgets.borders
+ui.gadgets.buttons ui.gadgets.editors ui.gadgets.frames
+ui.gadgets.grids ui.gadgets.labels ui.gadgets.packs
+ui.gadgets.scrollers ui.gadgets.sliders ui.gadgets.tracks
+ui.gadgets.world ui.gadgets.worlds ui.tools.common
+units.imperial units.si vocabs ;
 QUALIFIED-WITH: models.range mr
+IN: gadget-play
 
 : (tuples) ( seq -- seq )
     [ tuple? ] collect-by  t swap at

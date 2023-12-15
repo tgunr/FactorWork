@@ -1,12 +1,12 @@
 ! Copyright (C) 2008 Slava Pestov.
 ! See http://factorcode.org/license.txt for BSD license.
-USING: slides help.markup math arrays hashtables namespaces
-kernel sequences parser memoize io.encodings.binary
-locals kernel.private help.vocabs assocs quotations
-tools.annotations tools.crossref help.topics math.functions
-compiler.tree.optimizer compiler.cfg.optimizer fry
-ui.gadgets.panes tetris tetris.game combinators generalizations
-multiline sequences.private ;
+USING: alien.c-types arrays assocs combinators
+compiler.cfg.optimizer compiler.tree.optimizer fry
+generalizations hashtables help.markup help.topics help.vocabs
+io.encodings.binary kernel kernel.private locals math
+math.functions memoize multiline namespaces parser quotations
+sequences sequences.private slides tetris tetris.game
+tools.annotations tools.crossref ui.gadgets.panes ;
 IN: otug-talk
 
 : $tetris ( element -- )
@@ -175,7 +175,7 @@ CONSTANT: otug-slides
             { { $link head } { $link head-slice } }
             { { $link tail } { $link tail-slice } }
         }
-        { "Modifier: " { $link from-end } }
+!        { "Modifier: " { $link from-end } }
         { "Modifier: " { $link short } }
         "4*2*2=16 operations, 6 words!"
     }

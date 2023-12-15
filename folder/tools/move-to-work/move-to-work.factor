@@ -1,7 +1,8 @@
 ! Copyright (C) 2023 Dave Carlton.
 ! See https://factorcode.org/license.txt for BSD license.
-USING: accessors cli.git folder io.directories io.launcher io.pathnames
-kernel namespaces scratchpad sequences string  ;
+USING: accessors cli.git folder folder.duplicates io.directories
+io.launcher io.pathnames kernel namespaces scratchpad sequences
+string ;
 
 IN: cli.git
 : git-add* ( path -- ) { "git" "add" } swap suffix run-process drop ;
@@ -15,10 +16,9 @@ IN: folder.tools.move-to-work
 : only-gits ( f -- f )
     deep folder-entries [ name>> git? ] filter ;
 
-:: to-dest ( f -- )
-    dest get :> d
-    f d folder-copy-tree
-    d pathname>>  as-directory f name>> append >folder :> new
+:: to-dest ( src dest -- )
+    src dest folder-copy-tree
+    dest folder:pathname>>  as-directory  src name>> append >folder :> new
     new only-gits  [ delete-entry ] each
-    new pathname>> d path>> git-add
+    new folder:pathname>> dest path>> git-add
     ;

@@ -433,11 +433,11 @@ end: return;
         { $code ": glue ( left right middle -- seq' )
     swap 3append ;"
         }
-        { $code HEREDOC: xyz
-"a" "b" "c" 3append
-"a" """""""" surround
-"a" "b" ", " glue
-xyz
+        { $code "HEREDOC: xyz
+\"a\" \"b\" \"c\" 3append
+\"a\" \"\"\"\"\"\"\"\" surround
+\"a\" \"b\" \", \" glue
+xyz"
         }
     }
     { $slide "C FFI demo"

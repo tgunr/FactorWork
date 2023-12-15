@@ -79,8 +79,8 @@ DEFER: gen-steps
 : do-the-bi ( stack -- stack )
     (do-the-bi) , "bi" end-shuffle , ; inline
 
-#! Checks if the quotation's effect is equivalent to the given effect
-#! (in arity, disregarding names).
+! Checks if the quotation's effect is equivalent to the given effect
+! (in arity, disregarding names).
 : is-this-your-effect? ( quot effect -- ? ) [ infer ] dip effect= ;
 
 : wrong-effect ( quot effect -- string )

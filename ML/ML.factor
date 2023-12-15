@@ -56,6 +56,7 @@ B    "annotations" over at [ values \ Annotation prefix >tuple ] map
     ML-Images get  "/Users/davec/Work/MLAnnotations/ML.json" pprint-json>path
     ;
 
+FROM: folder => pathname>> ;
 : image-coordinates ( entry -- ml-coordinate )
     pathname>> load-image
     dim>>  first2  swap  0 -rot  0 swap  ml-coordinate boa

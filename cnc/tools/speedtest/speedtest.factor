@@ -5,8 +5,9 @@
 ! Copyright (C) 2023 Dave Carlton.
 ! See http://factorcode.org/license.txt for BSD license.
 
-USING: cnc.machine.1F kernel namespaces cnc.job uuid accessors math calendar cnc.tools ;
-
+USING: accessors calendar cnc.job cnc.machine.1F cnc.tools
+kernel math namespaces slots.syntax uuid ;
+FROM: cnc.tools.speedtest => units ;
 IN: cnc.tools.speedtest
 
 SYMBOLS: xstart ystart xend yend units ; 
@@ -38,14 +39,14 @@ TUPLE: test-job < job speed feed doc bit ;
 
 : <test-job> ( <bit> <speed> <feed> <doc> -- <test-job> )
     test-job new
+    swap >>doc
+    swap >>feed
+    swap >>speed
     swap >>bit
     uuid1 >>job_id
     "speedtest" >>job_name
     today >>job_date
     <1F> >>machine_id
-    swap >>speed
-    swap >>feed
-    swap >>doc
     ;
     
 : testpath ( xstart ystart xend yend -- )
@@ -61,12 +62,8 @@ TUPLE: test-job < job speed feed doc bit ;
     800 100 <feed>
     .1 .1 <doc>
     <test-job>
-    slots[ machine_id bit speed feed doc ]
-    slots[ depth step ] 
-    
-    
-    
     ;
+    
 
 
 
