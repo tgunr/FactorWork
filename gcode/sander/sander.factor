@@ -5,7 +5,8 @@
 ! Copyright (C) 2018 Dave Carlton.
 ! See http://factorcode.org/license.txt for BSD license.
 
-USING: kernel math math.parser namespaces sequences prettyprint io.files io.encodings.utf8 ;
+USING: io.encodings.utf8 io.files kernel math math.parser
+namespaces prettyprint sequences syntax.terse ;
 IN: gcode.sander
 
 CONSTANT: bedX 200

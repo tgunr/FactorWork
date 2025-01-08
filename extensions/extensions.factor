@@ -419,3 +419,20 @@ IN: scratchpad
     "USING: " prepend " ;" append
     clipboard get set-clipboard-contents ;
 
+IN: color-picker
+: <pack-color-picker> ( constructor -- gadget )
+    vertical <pack> { 5 5 } >>gap swap <color-sliders>
+    [ add-gadget ] dip
+    [ <color-preview>  add-gadget ]
+    [ <color-status> add-gadget ] bi ;
+
+: pack-color-picker-window ( -- )
+    [
+        f
+        T{ world-attributes { title "Color Picker" } }
+        clone
+        [ <pack-color-picker> ] <color-tabs>
+        >>gadgets
+        open-window
+    ] with-ui ;
+

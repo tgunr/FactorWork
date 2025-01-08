@@ -12,7 +12,7 @@ folder.collection sequences.extras serialize splitting threads unix.ffi words fo
 
 IN: folder.collection.music
 
-FROM: string => to-folder ;
+FROM: string => >folder ;
 
 CONSTANT: MUSIC-FOLDER "/Users/davec/Music/Plex"
 CONSTANT: MUSIC-COLLECTION "/tmp/music.fstore"
@@ -25,24 +25,24 @@ FROM: folder.collection => (restore-collection) ;
     MUSIC-COLLECTION (restore-collection) ; 
 
 : (singles) ( -- folder )
-    SINGLES get to-folder ;
+    SINGLES get >folder ;
 
 : set-symbols ( collection -- )
-    COLLECTION set
+    collection set
     MUSIC-FOLDER COLLECTION-FOLDER set
     "~/Music/Plex/Singles" SINGLES set
-    \ not-dot-file? FolderFilter set
+    \ not-dot-file? FOLDERFILTER set
     ;
 
 : delete-single-entries ( seq -- )
-    [ delete-entry-tree ] each ;
+    [ entry-delete-tree ] each ;
 
 : (init-singles) ( -- )
-    MUSIC-FOLDER collect-files
+    MUSIC-FOLDER path-collect
     collection get
     filter-single-entry
     (singles) 
-    over [ over move-entries ] each drop
+    over [ over entry-move ] each drop
     delete-single-entries ;
 
 : do-singles ( -- )

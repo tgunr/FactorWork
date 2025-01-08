@@ -40,7 +40,7 @@ INITIALIZED-SYMBOL: PDF-FOLDER [ ART-FOLDER get "PDF/" "/" glue ]
 : quint-name ( -- newname )
     uuid1 string>uuid  32 >quint ; 
 
-! FROM: folder => pathname>> ;
+FROM: folder => pathname>> ;
 :: set-xattr ( oldname entry -- )
     RENAMED-ID get oldname <xattr> :> newxattr
     newxattr entry pathname>> xattrStore

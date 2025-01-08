@@ -1,15 +1,16 @@
 ! Copyright (C) 2023 Dave Carlton.
 ! See https://factorcode.org/license.txt for BSD license.
-USING: accessors ascii assocs fonts help.apropos help.home help.topics
-io kernel math models namespaces openai sequences ui.gadgets
-ui.gadgets.editors ui.gadgets.status-bar ui.gadgets.tracks
-ui.gadgets.worlds ui.text ui.tools.browser ui.tools.browser.history
-ui.tools.listener ui.tools.common urls webbrowser wrap ;
+
+USING: accessors ascii assocs fonts help.apropos help.home
+help.topics io kernel math models namespaces openai sequences ui
+ui.gadgets ui.gadgets.editors ui.gadgets.status-bar
+ui.gadgets.tracks ui.gadgets.worlds ui.text ui.tools.browser
+ui.tools.browser.history ui.tools.common urls webbrowser ;
 
 IN: wrap.strings
 : listener-wrap-string ( string -- 'string )
-    listener-gadget get-tool-dim first 
-    monospace-font " " text-width >integer /  wrap ;
+    listener-get get-tool-dim first 
+    monospace-font " " text-width >integer /  wrap-string ;
 
 IN: davec.openai 
 
@@ -30,7 +31,7 @@ TUPLE: gpt-gadget < browser-gadget ;
 : >q ( question -- )
     "gpt-4-0314"
     swap <completion> 1000 >>max_tokens create-completion
-    "choices" of first "text" of  wrap print ; 
+    "choices" of first "text" of  listener-wrap-string print ; 
 
 : show ( link browser-gadget -- )
     [ >link ] dip [

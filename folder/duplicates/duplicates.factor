@@ -106,6 +106,7 @@ USE: folder.collection
     [ fingerprintRead ] collect-by 
     ;
 
+FROM: folder => pathname>> ;
 : delete&relink ( entry1 entry2 -- )
     dup does-exist?
     [ dup entry-delete ] when
