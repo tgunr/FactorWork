@@ -6,6 +6,7 @@
 ! See http://factorcode.org/license.txt for BSD license.
 USING: accessors formatting io io.encodings.utf8 io.files
 kernel math math.parser multiline namespaces sequences variables
+cnc
 cnc.gcode
 cnc.bit
 cnc.tools

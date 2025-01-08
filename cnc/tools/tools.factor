@@ -4,7 +4,7 @@
 ! Description: Another fine Factor file!
 ! Copyright (C) 2022 Dave Carlton.
 ! See http://factorcode.org/license.txt for BSD license.
-USING: accessors cnc.gcode io kernel sequences ;
+USING: accessors cnc cnc.gcode io kernel sequences ;
 IN: cnc.tools
 
 TUPLE: toolpath  id machine bit gcode ;
