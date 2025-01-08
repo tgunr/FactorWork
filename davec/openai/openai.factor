@@ -4,14 +4,14 @@ USING: accessors ascii assocs fonts help.apropos help.home help.topics
 io kernel math models namespaces openai sequences ui.gadgets
 ui.gadgets.editors ui.gadgets.status-bar ui.gadgets.tracks
 ui.gadgets.worlds ui.text ui.tools.browser ui.tools.browser.history
-ui.tools.common urls webbrowser ;
+ui.tools.listener ui.tools.common urls webbrowser wrap ;
 
 IN: wrap.strings
 : listener-wrap-string ( string -- 'string )
-    listner-gadget get-tool-dim first 
-    monospace-font " " text-width >integer /  wrap-string ;
+    listener-gadget get-tool-dim first 
+    monospace-font " " text-width >integer /  wrap ;
 
-IN: davec.openai
+IN: davec.openai 
 
 "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" openai-api-key set-global
 
@@ -21,16 +21,16 @@ TUPLE: gpt-gadget < browser-gadget ;
     URL" https://platform.openai.com/docs/models/overview" open-url ;
 
 : test ( -- )
-    "text-davinci-003"
+    "gpt-4-0314"
     "what is the factor programming language"
     <completion> 100 >>max_tokens create-completion
     "choices" of first "text" of print ;
 
 
 : >q ( question -- )
-    "text-davinci-003"
+    "gpt-4-0314"
     swap <completion> 1000 >>max_tokens create-completion
-    "choices" of first "text" of  listner-wrap-string print ; 
+    "choices" of first "text" of  wrap print ; 
 
 : show ( link browser-gadget -- )
     [ >link ] dip [
