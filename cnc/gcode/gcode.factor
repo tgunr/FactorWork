@@ -18,6 +18,7 @@ TUPLE: gcodes step feed bit-size codes ;
     { } >>codes
     ;
 
+! gcode is just a string that gets passed along and appended to 
 : (gc) ( gcode n letter -- str )
     [ dup number? [ number>string +space ] when ] dip  prepend  append ;
 
@@ -93,7 +94,7 @@ TUPLE: gcodes step feed bit-size codes ;
 : e-relative ( -- gc )  84 M ;
 : set-axis-steps ( -- gc )  92 M ;
 : temp-nowait ( -- gc )  104 M ; 
-: temp-wait ( -- gc )  109 M ;    ! Set target temperature for E1 to 205 = set-temp-wait 1 e 205 s
+: temp-wait ( -- gc )  109 M ;    
 
 : fan-on ( -- gc )  106 M ;
 : fan-off ( -- gc )  107 M ;
