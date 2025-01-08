@@ -8,7 +8,7 @@ IN: dropbox
 
 TUPLE: dropbox ;
 
-CONSTANT: db-library-folder "~/Dropbox/Private/Library"
+CONSTANT: db-library-folder "/Volumes/home_davec/Library"
 CONSTANT: user-library-folder "~/Library"
 CONSTANT: db-appsupport-name  "Application\ Support"
 CONSTANT: db-preferences-name "Preferences"
