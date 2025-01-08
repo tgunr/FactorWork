@@ -38,9 +38,10 @@ mtype "TYPES" {
 } define-persistent
 
 ENUM: machineIs +3d+ +cnc+ +laser+ ;
-TUPLE: machine name make model type units xmax ymax zmax  support_rotary support_tool_change id ;
+TUPLE: machine id name make model type units xmax ymax zmax  support_rotary support_tool_change id ;
 
 machine "machine" {
+    { "id" "id" TEXT }
     { "name" "name" TEXT }
     { "make" "make" TEXT }
     { "model" "model" TEXT }
