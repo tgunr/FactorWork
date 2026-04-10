@@ -1,0 +1,42 @@
+! Copyright (C) 2023 Dave Carlton.
+! See https://factorcode.org/license.txt for BSD license.
+USING: combinators formatting hashtables.private io.encodings.utf8
+io.files kernel math.order math.parser namespaces sequences
+splitting.extras layouts file-picker ;
+IN: cnc.tools.boundary
+
+SYMBOLS: xmin ymin xmax ymax ;
+
+: get-contents ( -- seq )
+    most-positive-fixnum xmin set  most-positive-fixnum
+    ymin set 0 xmax set  0 ymax set 
+    open-file-dialog first utf8 file-lines
+    [ [ "G" swap subseq? ] [ "X" swap subseq? ] [ "Y" swap subseq? ] tri  or or ] filter
+    ;
+
+: process-pair ( letter number -- )
+    swap {
+        { "X" [
+              [ xmin get swap string>number min  xmin set ]
+              [ xmax get swap string>number max  xmax set ] bi
+          ] }
+        { "Y" [
+              [ ymin get swap string>number min  ymin set ]
+              [ ymax get swap string>number max  ymax set ] bi
+          ] }
+        [ 2drop ]
+    } case ;
+
+: process-sequence ( seq -- )
+    [ process-pair ] each-pair ;
+
+: extract ( str -- )
+    "GXYZF" split* process-sequence ;
+
+: boundary ( -- )
+    get-contents
+    [ extract ] each
+    xmin get ymin get ymax get xmax get  
+    "Xmin: %d Ymin: %d Xmax: %d Ymax:%d\n" printf ;
+
+

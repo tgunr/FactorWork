@@ -1,0 +1,30 @@
+{
+  "DVTSourceControlWorkspaceBlueprintPrimaryRemoteRepositoryKey" : "04B1BCE4056E533C7DC3550CE43D39BDD44694DF",
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyRepositoryLocationsKey" : {
+
+  },
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyStatesKey" : {
+    "04B1BCE4056E533C7DC3550CE43D39BDD44694DF" : 0,
+    "17C7BA19BDF19F5605782FDFA5B076E291554FE4" : 0
+  },
+  "DVTSourceControlWorkspaceBlueprintIdentifierKey" : "79A2D03B-A435-4BE1-82E2-1660CB8E8F96",
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyPathsKey" : {
+    "04B1BCE4056E533C7DC3550CE43D39BDD44694DF" : "FactorFinder\/",
+    "17C7BA19BDF19F5605782FDFA5B076E291554FE4" : ""
+  },
+  "DVTSourceControlWorkspaceBlueprintNameKey" : "FactorFinder",
+  "DVTSourceControlWorkspaceBlueprintVersion" : 204,
+  "DVTSourceControlWorkspaceBlueprintRelativePathToProjectKey" : "FactorFinder.xcodeproj",
+  "DVTSourceControlWorkspaceBlueprintRemoteRepositoriesKey" : [
+    {
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "github.com:tgunr\/FactorFinder.git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "04B1BCE4056E533C7DC3550CE43D39BDD44694DF"
+    },
+    {
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "bitbucket.org:tgunr\/factor-work.git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "17C7BA19BDF19F5605782FDFA5B076E291554FE4"
+    }
+  ]
+}
