@@ -7,7 +7,7 @@ IN: gstreamer.tag.ffi
 <<
 "gstreamer.tag" {
     { [ os winnt? ] [ drop ] }
-    { [ os macosx? ] [ drop ] }
+    { [ os macos? ] [ drop ] }
     { [ os unix? ] [ "libgsttag-0.10.so" cdecl add-library ] }
 } cond
 >>

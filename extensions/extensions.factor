@@ -9,7 +9,8 @@ USING: accessors alien.c-types alien.data assocs byte-arrays byte-vectors
  math math.order math.parser namespaces parser prettyprint.sections
  regexp sequences sequences.private serialize slots.private sorting
  splitting.extras strings strings.parser system tools.scaffold tr
- typed ui.clipboards ui.commands ui.gestures ui.text ui.tools.browser
+ typed ui.clipboards ui.commands ui.gestures ui.text ui.tools.browser ui.gadgets 
+ ui.gadgets.pack strings
  ui.tools.common ui.tools.listener variables vocabs.loader vocabs.parser words ;
 
 IN: extensions

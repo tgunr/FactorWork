@@ -131,7 +131,7 @@ PRIVATE>
     pcap-header memory>struct ;
 
 << "pcap" {
-    { [ os macosx? ] [ "libpcap.dylib" cdecl add-library ] }
+    { [ os macos? ] [ "libpcap.dylib" cdecl add-library ] }
     { [ os windows? ] [ "pcap.dll" cdecl add-library ] }
     [ drop ]
 } cond >>

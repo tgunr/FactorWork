@@ -9,7 +9,7 @@ IN: mysql.ffi
 
 << "mysql" {
         { [ os windows? ]  [ "mysql.dll" ] }  ! ok for windows?
-        { [ os macosx? ] [ "/opt/local/lib/mysql5/mysql/libmysqlclient.dylib" ] }
+        { [ os macos? ] [ "/opt/local/lib/mysql5/mysql/libmysqlclient.dylib" ] }
         { [ os unix? ]  [ "libmysql.so" ] }   ! ok for unix?
     } cond cdecl add-library >>
 

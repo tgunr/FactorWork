@@ -9,7 +9,7 @@ IN: gstreamer.audio.ffi
 <<
 "gstreamer.audio" {
     { [ os winnt? ] [ drop ] }
-    { [ os macosx? ] [ drop ] }
+    { [ os macos? ] [ drop ] }
     { [ os unix? ] [ "libgstaudio-0.10.so" cdecl add-library ] }
 } cond
 >>

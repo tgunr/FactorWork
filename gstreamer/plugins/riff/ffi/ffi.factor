@@ -9,7 +9,7 @@ IN: gstreamer.ffi
 <<
 "gstreamer" {
     { [ os winnt? ] [ drop ] }
-    { [ os macosx? ] [ drop ] }
+    { [ os macos? ] [ drop ] }
     { [ os unix? ] [ "libgstreamer-0.10.so" cdecl add-library ] }
 } cond
 >>

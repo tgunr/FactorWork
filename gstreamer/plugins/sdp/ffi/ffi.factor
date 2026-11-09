@@ -7,7 +7,7 @@ IN: gstreamer.sdp.ffi
 <<
 "gstreamer.sdp" {
     { [ os winnt? ] [ drop ] }
-    { [ os macosx? ] [ drop ] }
+    { [ os macos? ] [ drop ] }
     { [ os unix? ] [ "libgstsdp-0.10.so" cdecl add-library ] }
 } cond
 >>

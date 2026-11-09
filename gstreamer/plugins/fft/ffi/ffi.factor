@@ -8,7 +8,7 @@ IN: gstreamer.fft.ffi
 <<
 "gstreamer.fft" {
     { [ os winnt? ] [ drop ] }
-    { [ os macosx? ] [ drop ] }
+    { [ os macos? ] [ drop ] }
     { [ os unix? ] [ "libgstfft-0.10.so" cdecl add-library ] }
 } cond
 >>

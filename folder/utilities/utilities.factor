@@ -46,4 +46,3 @@ VAR: downloads
      ] with-folder
      ;
 
-: org-downloads ( -- )  "~/Downloads" org-folder ;

@@ -8,7 +8,7 @@ IN: gstreamer.interfaces.ffi
 <<
 "gstreamer.interfaces" {
     { [ os winnt? ] [ drop ] }
-    { [ os macosx? ] [ drop ] }
+    { [ os macos? ] [ drop ] }
     { [ os unix? ] [ "libgstinterfaces-0.10.so" cdecl add-library ] }
 } cond
 >>

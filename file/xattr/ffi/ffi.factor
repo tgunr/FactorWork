@@ -12,7 +12,7 @@ IN: xattr.ffi
 
 <<
 "libxattr" {
-        { [ os macosx? ] [ "/usr/lib/libSystem.dylib" ] }
+        { [ os macos? ] [ "/usr/lib/libSystem.dylib" ] }
         { [ os linux? ]  [ "/lib/x86_64-linux-gnu/libattr.a" ] }
 } cond
 cdecl add-library >>

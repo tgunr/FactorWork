@@ -17,7 +17,7 @@ IN: prettyprint.config
 : decimal ( -- )
     10 number-base set ;    
    
-os macosx? [
+os macos? [
     "/Applications/Aquamacs.app/Contents/MacOS/bin/emacsclient" emacsclient-path set-global
 ] when
 

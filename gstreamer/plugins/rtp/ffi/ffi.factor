@@ -7,7 +7,7 @@ IN: gstreamer.rtp.ffi
 <<
 "gstreamer.rtp" {
     { [ os winnt? ] [ drop ] }
-    { [ os macosx? ] [ drop ] }
+    { [ os macos? ] [ drop ] }
     { [ os unix? ] [ "libgstrtp-0.10.so" cdecl add-library ] }
 } cond
 >>

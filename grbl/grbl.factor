@@ -22,9 +22,9 @@ TUPLE: grbl-gadget < tool
 : com-home ( browser -- ) drop ;
 
 grbl-gadget "toolbar" f {
-    { T{ key-down f ${ os macosx? M+ A+ ? } "LEFT" } com-back }
-    { T{ key-down f ${ os macosx? M+ A+ ? } "RIGHT" } com-forward }
-    { T{ key-down f ${ os macosx? M+ A+ ? } "HOME" } com-home }
+    { T{ key-down f ${ os macos? M+ A+ ? } "LEFT" } com-back }
+    { T{ key-down f ${ os macos? M+ A+ ? } "RIGHT" } com-forward }
+    { T{ key-down f ${ os macos? M+ A+ ? } "HOME" } com-home }
 } define-command-map
 
 : <grbl-toolbar> ( grbl -- toolbar )

@@ -123,8 +123,8 @@ global [ \"Henry VIII\" king set ] with-variables"
     { $slide "Hooks"
         "Dispatch on a dynamic variable"
         { $code "HOOK: computer-name os ( -- string )
-M: macosx computer-name uname first ;
-macosx \ os set-global
+M: macos computer-name uname first ;
+macos \ os set-global
 computer-name"
         }
     }

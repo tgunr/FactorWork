@@ -7,7 +7,7 @@ IN: gstreamer.pbutils.ffi
 <<
 "gstreamer.pbutils" {
     { [ os winnt? ] [ drop ] }
-    { [ os macosx? ] [ drop ] }
+    { [ os macos? ] [ drop ] }
     { [ os unix? ] [ "libgstpbutils-0.10.so" cdecl add-library ] }
 } cond
 >>

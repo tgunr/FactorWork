@@ -15,7 +15,7 @@ USING: accessors assocs checksums checksums.adler-32 checksums.fnv1 classes.tupl
  math math.order math.parser math.unicode namespaces prettyprint
  prettyprint.config prettyprint.custom regexp sequences sorting splitting
  strings syntax.terse threads unix.ffi unix.users variables
- words  ;
+ words file.xattr ;
 IN: folder
 
 CONSTANT: BUNDLEID "net.polymicro."
@@ -24,6 +24,8 @@ CONSTANT: DOMAIN-ID "net.polymicro."
     
 TUPLE: folder-entry < directory-entry path info xattrs entries fingerprint depth ;
 
+:: <folde-entry> ( class name type path info -- folder-entry )
+    name type path info 
 :: trunc-path ( seq -- 'seq )
     length-limit get :> ll
     seq dup length ll >
@@ -222,7 +224,8 @@ IN: folder
 
 DEFER: does-exist?
 DEFER: pathnameGet
-    
+
+USE: file.xattr    
 : (xattrs@) ( entry -- entry )
     dup does-exist? [ ! entry ? 
         dup xattrs>> empty? ! entry ?

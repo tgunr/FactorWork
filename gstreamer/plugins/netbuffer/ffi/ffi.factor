@@ -7,7 +7,7 @@ IN: gstreamer.netbuffer.ffi
 <<
 "gstreamer.netbuffer" {
     { [ os winnt? ] [ drop ] }
-    { [ os macosx? ] [ drop ] }
+    { [ os macos? ] [ drop ] }
     { [ os unix? ] [ "libgstnetbuffer-0.10.so" cdecl add-library ] }
 } cond
 >>

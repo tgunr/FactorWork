@@ -8,7 +8,7 @@ IN: gstreamer.rtsp.ffi
 <<
 "gstreamer.rtsp" {
     { [ os winnt? ] [ drop ] }
-    { [ os macosx? ] [ drop ] }
+    { [ os macos? ] [ drop ] }
     { [ os unix? ] [ "libgstrtsp-0.10.so" cdecl add-library ] }
 } cond
 >>
