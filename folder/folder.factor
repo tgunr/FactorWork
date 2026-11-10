@@ -24,8 +24,6 @@ CONSTANT: DOMAIN-ID "net.polymicro."
     
 TUPLE: folder-entry < directory-entry path info xattrs entries fingerprint depth ;
 
-:: <folde-entry> ( class name type path info -- folder-entry )
-    name type path info 
 :: trunc-path ( seq -- 'seq )
     length-limit get :> ll
     seq dup length ll >
@@ -387,7 +385,7 @@ GENERIC: entry>folder-tree ( path directory-entry -- folder )
     over first append  
     link-info suffix 
     folder-entry prefix
-    >tuple
+    unpack-tuple
     ;
     
 M: directory-entry entry>folder 
