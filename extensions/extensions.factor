@@ -10,7 +10,7 @@ USING: accessors alien.c-types alien.data assocs byte-arrays byte-vectors
  regexp sequences sequences.private serialize slots.private sorting
  splitting.extras strings strings.parser system tools.scaffold tr
  typed ui.clipboards ui.commands ui.gestures ui.text ui.tools.browser ui.gadgets
- ui.gadgets.pack
+ ui.gadgets.packs ui.gadgets.worlds color-picker
  ui.tools.common ui.tools.listener variables vocabs.loader vocabs.parser words ;
 
 IN: extensions
