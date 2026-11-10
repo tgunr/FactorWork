@@ -1,0 +1,3 @@
+[submodule "fuel"]
+	path = fuel
+	url = https://github.com/factor/fuel.git
